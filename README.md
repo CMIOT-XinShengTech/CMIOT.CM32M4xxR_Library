@@ -5,11 +5,13 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 # 目录结构说明
 -   Drivers：芯片驱动，包括NMSIS、外设驱动。
 
--   Project: 适配CM32M4xxR_LQFP128_STB开发板的参考例程和工程模板。
+-   Project: 适配CM32M4xxR_LQFP128_STB开发板的BSP、参考例程和工程模板。
 
 -   Doc: 包括芯片芯片手册、软硬件手册、开发板原理图等技术文档。
 
 -   Tools:包括芯片支持包Support Pack工具和下载工具。
+
+参考例程包括如下内容：
 
 | **样例工程**                          | **功能描述**                                                                                                                                                                                                                       |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -169,7 +171,7 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 |   └─WWDG_Reset                        | [WWDG复位功能](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/WWDG/WWDG_Reset)                                                                                                       |
 
 # 如何使用
-todo
+请参考https://github.com/Nuclei-Software/nuclei-sdk/wiki/Nuclei-Studio-NPK-Introduction
 # 开发板介绍
 todo
 # 芯昇科技有限公司
