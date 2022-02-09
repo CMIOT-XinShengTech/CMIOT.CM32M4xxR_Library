@@ -40,7 +40,7 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 | ├─CRC                                 |                                                                                                                                                                                                                                    |
 | │ └─CalCRC                            | [硬件CRC的基本功能和算法](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/CRC/CalCRC)                                                                                                 |
 | ├─DAC                                 |                                                                                                                                                                                                                                    |
-| │ ├─DoubleModeDMASineWave             | [同时触发模式下DMA双通道输出正弦波示例](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/DAC/DoubleModeDMASineWave)                                                                    |
+| │ ├─DoubleModeDMASineWave             | [同时触发模式下DMA双通道输出正弦波示例](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/DAC/DoubleModeDMASineWave)                                                                                   |
 | │ ├─OneChannelOutputNoiseWave         | [单通道输出噪音信号示例](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/DAC/OneChannelOutputNoiseWave)                                                                               |
 | │ └─TwoChannelsTriangleWave           | [双通道输出三角波示例](../../../CM32M4xxR_SDK_1.0.0/CMIOT.CM32M4xxR_Library/Projects/CM32M4xxR_LQFP128_STB/Examples/DAC/TwoChannelsTriangleWave)                                                                                   |
 | ├─DMA                                 |                                                                                                                                                                                                                                    |
@@ -172,7 +172,5 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 
 # 如何使用
 请参考https://github.com/Nuclei-Software/nuclei-sdk/wiki/Nuclei-Studio-NPK-Introduction
-# 开发板介绍
-todo
 # 芯昇科技有限公司
 芯昇科技有限公司注册成立于2020年12月29日，是中移物联网有限公司出资成立的子公司。按照中国移动通信集团“科改示范行动”整体改革布局，芯昇科技围绕物联网芯片国产化，以促进国家集成电路产业振兴为目标，以“创芯驱动万物互联，加速社会数智化转型”为使命，致力于成为“最具创新力的物联网芯片及应用领航者”。
