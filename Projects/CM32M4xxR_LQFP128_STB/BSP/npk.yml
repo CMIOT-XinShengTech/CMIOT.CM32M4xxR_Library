@@ -1,0 +1,74 @@
+## Package Base Information
+name: bsp-cm32m4xxr_lqfp128stb
+owner: XinShengTech
+description: CM32M4xxR_LQFP128_STB Board Support Package
+version: 1.1.0
+type: bsp
+keywords:
+  - lqfp128stb
+  - cm32m4xxr
+  - risc-v
+  - xinsheng
+license: Apache-2.0
+homepage: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+
+packinfo:
+  vendor: XinShengTech
+  name: CM32M4xxR_LQFP128_STB
+  doc:
+    website: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+    sch: ../../../Docs/CM32M4xxR-LQFP128_STB/CM32M4xxR-LQFP128_STB_00.pdf
+    usermanual: ../Docs/CM32M4xxR-LQFP128开发板使用指南V1.0.pdf
+    extra:
+      - uri: "../../../Docs/CM32M4xxR-LQFP128_STB/ExB_Class6_interface_00.pdf"
+        description: sch
+      - uri: "../../../Docs/CM32M4xxR-LQFP128_STB/六类接口功能扩展板使用指南v1.0.pdf"
+        description: usermanual
+      - uri: "../../../Docs/CM32M4xxR-LQFP128_STB/CM32M4xxR-LQFP128开发板样例工程总体说明.pdf"
+        description: usermanual
+
+## Package Dependency
+dependencies:
+  - name: ssp-cm32m4xxr
+    version: 
+    owner: XinShengTech
+  - name: sdk-cm32m4xxr
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  log_exclude:
+    default_value: 0
+    global: false
+    type: checkbox
+    description: not include log.c
+
+## Source Code Management
+codemanage:
+  installdir: CM32M4xxR_LQFP128_STB
+  copyfiles:
+    - path: ["Include/"]
+    - path: ["Source/key.c"]
+    - path: ["Source/led.c"]
+    - path: ["Source/tsckey.c"]
+    - path: ["Source/log.c"]
+      condition: $( ${log_exclude} == 0 )
+  incdirs:
+    - path: ["Include/"]
+
+## Set Configuration for other packages
+setconfig:
+
+## Debug Configuration for this board
+debugconfig:
+  - type: openocd
+    description: Nuclei OpenOCD
+
+buildconfig:
+  - type: gcc
+    common_flags:
+      - flags:
+    common_defines:
+      - defines: DOWNLOAD_MODE=DOWNLOAD_MODE_$(upper(${download_mode}))
+      - defines: DOWNLOAD_MODE_STRING=\"$(upper(${download_mode}))\"

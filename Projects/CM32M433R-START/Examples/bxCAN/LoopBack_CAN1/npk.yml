@@ -1,0 +1,55 @@
+## Package Base Information
+name: app-START_LoopBack_CAN1
+owner: XinShengTech
+version:
+description: LoopBack_CAN1
+type: app
+keywords:
+  - bxCAN
+  - cm32m433rstart
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: bsp-cm32m4xxr_cm32m433rstart
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+    cflags:
+    asmflags:
+    cxxflags:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

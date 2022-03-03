@@ -1,0 +1,56 @@
+from build_tools import *
+
+pwd  = PresentDir()
+src  = Glob('source/*.c')
+
+#add files in extend
+src += Glob('source/extend/*.c')
+
+CPPPATH = [pwd + '/include']
+CPPPATH.append(pwd + '/include/extend')
+
+if IsDefined('OS_USING_HEAP') == False or IsDefined('OS_USING_MEM_SMALL') == False:
+    DeleteSrcFile(src, ['source/os_mem_small.c'])
+
+if IsDefined('OS_USING_HEAP') == False or IsDefined('OS_USING_MEM_SLAB') == False:
+    DeleteSrcFile(src, ['source/os_mem_slab.c'])
+
+if IsDefined('OS_USING_MEM_POOL') == False:
+    DeleteSrcFile(src, ['source/os_mem_pool.c'])
+
+if IsDefined('OS_USING_MEM_HEAP') == False:
+    DeleteSrcFile(src, ['source/os_mem_heap.c'])
+
+if IsDefined('OS_USING_SEMAPHORE') == False:
+    DeleteSrcFile(src, ['source/os_sem.c'])
+
+if IsDefined('OS_USING_MUTEX') == False:
+    DeleteSrcFile(src, ['source/os_mutex.c'])
+
+if IsDefined('OS_USING_EVENT') == False:
+    DeleteSrcFile(src, ['source/os_event.c'])
+
+if IsDefined('OS_USING_MAILBOX') == False:
+    DeleteSrcFile(src, ['source/os_mailbox.c'])
+
+if IsDefined('OS_USING_MESSAGEQUEUE') == False:
+    DeleteSrcFile(src, ['source/os_mq.c'])
+
+if IsDefined('OS_USING_MODULE') == False:
+    DeleteSrcFile(src, ['source/os_module.c'])
+
+if IsDefined('OS_USING_WORKQUEUE') == False:
+    DeleteSrcFile(src, ['source/extend/os_workqueue.c'])
+
+if IsDefined('OS_USING_COMPLETION') == False:
+    DeleteSrcFile(src, ['source/extend/os_completion.c'])
+
+if IsDefined('OS_USING_DATAQUEUE') == False:
+    DeleteSrcFile(src, ['source/extend/os_dataqueue.c'])
+
+if IsDefined('OS_USING_WAITQUEUE') == False:
+    DeleteSrcFile(src, ['source/extend/os_waitqueue.c'])
+
+group = AddCodeGroup('kernel', src, depend = [''], CPPPATH = CPPPATH)
+
+Return('group')

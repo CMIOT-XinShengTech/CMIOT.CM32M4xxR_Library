@@ -1,0 +1,58 @@
+## Package Base Information
+name: app-START_IAP_User
+owner: XinShengTech
+version:
+description: IAP_User
+type: app
+keywords:
+  - RISCV
+  - IAP
+  - cm32m433rstart
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: bsp-cm32m4xxr_cm32m433rstart
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","gcc_cm32m4xxr_flashxip.ld","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+    linkscript:                         
+      - script: "gcc_cm32m4xxr_flashxip.ld"
+    cflags:
+    asmflags:
+    cxxflags:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command: riscv-nuclei-elf-objcopy -O binary .\IAP_User.elf .\IAP_User.bin
+      description: "create binary"

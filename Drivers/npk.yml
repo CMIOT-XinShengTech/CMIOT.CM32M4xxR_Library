@@ -1,0 +1,182 @@
+## Package Base Information
+name: ssp-cm32m4xxr
+owner: XinShengTech
+description: CM32M4xxR SoC Support Package
+version: 1.1.0
+type: ssp
+keywords:
+  - cm32m4xxr
+  - xinsheng
+  - risc-v
+
+license: Apache-2.0
+homepage: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+
+packinfo:
+  core_vendor: Nuclei
+  vendor: XinShengTech
+  name: CM32M4xxR
+  doc:
+    website: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+    datasheet: ../Docs/Soc/CM32M4xxR系列数据手册.pdf
+    usermanual: ..Docs/Soc/CM32M4xxR系列用户手册.pdf
+    extra:
+      - uri: "../Docs/Soc/CM32M4xxR系列芯片快速上手指南.pdf"
+        description: UserManual
+      - uri: "../Docs/Soc/CM32M4xxR系列应用笔记.pdf"
+        description: ChipAppNote
+      - uri: "../Docs/Soc/CM32M4xxR系列芯片驱动库总体说明.pdf"
+        description: SoftwareNote
+      - uri: "../Docs/Soc/CM32M4xxR系列芯片中断应用指南.pdf"
+        description: SoftwareNote
+      - uri: "../Docs/Soc/从Cortex-M4到芯来N308应用移植说明.pdf"
+        description: SoftwareNote
+      - uri: "../Docs/Soc/CM2M4xxR_StdPeriph_Driver User Manual.chm"
+        description: UserManual
+        
+## Package Dependency
+dependencies:
+  - name: sdk-cm32m4xxr
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  startup_special:
+    default_value: 0
+    global: false
+    type: checkbox
+    description: soc startup.s enable
+  nuclei_core:
+    default_value: n308
+    type: choice
+    global: true
+    description: Nuclei RISC-V Core
+    choices:
+      - name: n308
+        arch: rv32imacfp
+        abi: ilp32f
+        description: N308
+  newlibsel:
+    default_value: nano
+    type: choice
+    global: true
+    description: Newlib Selection
+    choices:
+      - name: normal
+        description: Normal Newlib
+      - name: nano_with_printfloat
+        description: Newlib Nano with print float support
+      - name: nano
+        description: Newlib Nano
+  download_mode:
+    default_value: flashxip
+    type: choice
+    global: true
+    description: Download/Run Mode
+    choices:
+      - name: ilm
+        description: ILM download mode, program will be download into ilm/ram and run directly in ilm/ram, program lost when poweroff
+      - name: flash
+        description: FLASH download mode, program will be download into flash, when running, program will be copied to ilm/ram and run in ilm/ram
+      - name: flashxip
+        description: FLASHXIP download mode, program will to be download into flash and run directly in Flash
+
+
+## Source Code Management
+codemanage:
+  installdir: CM32M4xxR
+  copyfiles:
+    - path: ["CM32M4xxR_Algo_Library"]
+    - path: ["CM32M4xxR_StdPeriph_Driver"]
+    - path: ["NMSIS/Core"]
+    - path: ["NMSIS/DSP"]
+    - path: ["NMSIS/Library"]
+    - path: ["NMSIS/Device/Source/GCC/gcc_cm32m4xxr_flash.ld"]
+    - path: ["NMSIS/Device/Source/GCC/gcc_cm32m4xxr_flashxip.ld"]
+    - path: ["NMSIS/Device/Source/GCC/gcc_cm32m4xxr_ilm.ld"]
+    - path: ["NMSIS/Device/Source/GCC/intexc_cm32m4xxr.S"]
+    - path: ["NMSIS/Device/Source/GCC/startup_cm32m4xxr.S"]
+      condition: $( ${startup_special} == 0 )
+    - path: ["NMSIS/Device/Include"]
+    - path: ["Env"]
+    - path: ["CM32M4xxR.svd"]
+  incdirs:
+    - path: ["CM32M4xxR_StdPeriph_Driver/Include"]
+    - path: ["CM32M4xxR_Algo_Library/Include"]
+    - path: ["ENV/Stubs"]
+    - path: ["NMSIS/Core/Include"]
+    - path: ["NMSIS/Device/Include"]
+    - path: ["NMSIS/DSP/Include", "NMSIS/DSP/Include/dsp", "NMSIS/DSP/PrivateInclude"]
+  libdirs:
+    - path: ["NMSIS/Library/DSP/GCC"]
+    - path: ["CM32M4xxR_Algo_Library/Lib"]
+  ldlibs:
+    - libs: ["nmsis_dsp_rv32imafcp"]
+    - libs: ["cm32m4xxr_aes_rv32imafc"]
+    - libs: ["cm32m4xxr_des_rv32imafc"]
+    - libs: ["cm32m4xxr_hash_rv32imafc"]
+    - libs: ["cm32m4xxr_sm4_rv32imafc"]
+    - libs: ["cm32m4xxr_algo_common_rv32imafc"]
+## Set Configuration for other packages
+setconfig:
+
+
+## Debug Configuration for this SoC
+debugconfig:
+  - type: openocd
+    description: Nuclei OpenOCD
+    svd: CM32M4xxR.svd
+    configs:
+      - key: config
+        value: "Env/cm32m4xxr.cfg"
+  - type: openocd
+    executable: cmlink_gdbserver
+    launch: cmlink
+    description: Nuclei OpenOCD
+    svd: CM32M4xxR.svd
+    configs:
+      - key: config
+        value: "Env/cm32m4xxr.cfg"
+  - type: jlink
+    description: Segger Jlink
+    svd: CM32M4xxR.svd
+    configs:
+       - key: device_name
+         value: CM32M4xxR # if leave empty, it will try riscv_arch conversion, otherwise it will directly using this value
+       - key: riscv_arch
+         value: ${nuclei_core.arch} # arch to device name conversion happened in IDE, eg. rv32imac -> N305
+       - key: interface
+         value: jtag # jtag or cjtag
+       - key: speed
+         value: auto  # auto, adaptive, fixed value(KHz) such as 1000
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    description: Nuclei RISC-V GNU Toolchain #must
+    cross_prefix: riscv-nuclei-elf- # optional
+    linkscript:
+      - script: "NMSIS/Device/Source/GCC/gcc_cm32m4xxr_${download_mode}.ld"
+    common_flags: # flags need to be combined together across all packages
+      - flags: -g -fno-common -ffunction-sections -fdata-sections
+      - flags: -march=${nuclei_core.arch} -mabi=${nuclei_core.abi} -mcmodel=medany
+    ldflags:
+      - flags: -lstdc++ -nostartfiles --specs=nosys.specs
+      - flags: --specs=nano.specs
+        condition: $( ${newlibsel} != "normal" )
+      - flags: -u _printf_float
+        condition: $( ${newlibsel} == "nano_with_printfloat" )
+      - flags: -u _isatty -u _write -u _sbrk -u _read -u _close -u _fstat -u _lseek
+      - flags: -Xlinker --gc-sections
+    cflags:
+    asmflags:
+    cxxflags:
+    common_defines:
+      - defines:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

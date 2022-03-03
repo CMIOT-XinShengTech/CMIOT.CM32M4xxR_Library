@@ -1,0 +1,64 @@
+## Package Base Information
+name: app-LQFP128STB_DSP_fft_bin
+owner: XinShengTech
+version:
+description: fft_bin
+type: app
+keywords:
+  - RISCV
+  - DSP
+  - lqfp128stb
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: ssp-cm32m4xxr
+    version: 
+    owner: XinShengTech
+  - name: bsp-cm32m4xxr_lqfp128stb
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+      - flags: -lstdc++ -nostartfiles --specs=nosys.specs
+      - flags: --specs=nano.specs
+      - flags: -u _printf_float
+      - flags: -u _isatty -u _write -u _sbrk -u _read -u _close -u _fstat -u _lseek
+      - flags: -Xlinker --gc-sections
+    cflags:
+    asmflags:
+    cxxflags:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

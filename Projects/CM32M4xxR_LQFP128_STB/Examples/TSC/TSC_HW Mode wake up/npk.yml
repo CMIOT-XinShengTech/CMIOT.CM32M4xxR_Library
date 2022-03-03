@@ -1,0 +1,68 @@
+## Package Base Information
+name: app-LQFP128STB_TSC_HW Mode wake up
+owner: XinShengTech
+version:
+description: TSC_HW Mode wake up
+type: app
+keywords:
+  - TSC
+  - lqfp128stb
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: ssp-cm32m4xxr
+    version: 
+    owner: XinShengTech
+  - name: bsp-cm32m4xxr_lqfp128stb
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+  download_mode:
+    default_value: flashxip
+    type: choice
+    global: true
+    description: Download/Run Mode
+    choices:
+      - name: flashxip
+        description: FLASHXIP download mode, program will to be download into flash and run directly in Flash
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","Application/gcc_cm32m4xxr_stop2.ld","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+    cflags:
+    asmflags:
+    cxxflags:
+    linkscript:
+      - script: "Application/gcc_cm32m4xxr_stop2.ld"
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>TimeBase</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.genmakebuilder</name>
+			<triggers>clean,full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.cdt.managedbuilder.core.ScannerConfigBuilder</name>
+			<triggers>full,incremental,</triggers>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.cdt.core.cnature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
+		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>BSP</name>
+			<type>2</type>
+			<locationURI>PARENT-3-PROJECT_LOC/BSP</locationURI>
+		</link>
+		<link>
+			<name>Drivers</name>
+			<type>2</type>
+			<locationURI>PARENT-5-PROJECT_LOC/Drivers</locationURI>
+		</link>
+	</linkedResources>
+	<variableList>
+		<variable>
+			<name>FIRMWARE_LOC</name>
+			<value>file:/D:/NucleiStudio_workspace/CMIOT.CM32M4xxR_Library.0.1.0</value>
+		</variable>
+	</variableList>
+</projectDescription>

@@ -1,0 +1,58 @@
+## Package Base Information
+name: app-LQFP128STB_InputCapture
+owner: XinShengTech
+version:
+description: InputCapture
+type: app
+keywords:
+  - TIM
+  - lqfp128stb
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: ssp-cm32m4xxr
+    version: 
+    owner: XinShengTech
+  - name: bsp-cm32m4xxr_lqfp128stb
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+    cflags:
+    asmflags:
+    cxxflags:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

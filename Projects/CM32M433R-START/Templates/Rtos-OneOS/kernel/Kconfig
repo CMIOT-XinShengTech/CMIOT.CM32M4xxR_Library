@@ -1,0 +1,285 @@
+menu "Kernel"
+
+    choice
+        prompt "The max size of kernel object name"
+        default OS_NAME_MAX_15
+
+        config OS_NAME_MAX_7
+            bool "7"
+
+        config OS_NAME_MAX_15
+            bool "15"
+
+        config OS_NAME_MAX_31
+            bool "31"
+    endchoice
+    config OS_NAME_MAX
+        int
+        default 7  if OS_NAME_MAX_7
+        default 15 if OS_NAME_MAX_15
+        default 31 if OS_NAME_MAX_31
+
+    config OS_ALIGN_SIZE
+        int "Alignment size for CPU architecture data access"
+        default 4
+        help
+            Alignment size for CPU architecture data access
+
+    choice
+        prompt "The max level value of priority of task"
+        default OS_TASK_PRIORITY_32
+
+        config OS_TASK_PRIORITY_8
+            bool "8"
+        config OS_TASK_PRIORITY_32
+            bool "32"
+        config OS_TASK_PRIORITY_256
+            bool "256"
+    endchoice
+    config OS_TASK_PRIORITY_MAX
+        int
+        default 8   if OS_TASK_PRIORITY_8
+        default 32  if OS_TASK_PRIORITY_32
+        default 256 if OS_TASK_PRIORITY_256
+
+    config OS_TICK_PER_SECOND
+        int "Tick frequency(Hz)"
+        range 10 1000
+        default 100
+        help
+            System's tick frequency(Hz).
+
+    config OS_USING_OVERFLOW_CHECK
+        bool "Using stack overflow checking"
+        default y
+        help
+            Enable task stack overflow checking. The stack overflow is checking when
+            each task switch.
+
+	config OS_MAIN_TASK_STACK_SIZE
+        int "The stack size of main task"
+        default 2048
+		
+    config OS_USING_HOOK
+        bool "Enable system hook"
+        default y
+        select OS_USING_IDLE_HOOK
+        help
+            Enable the hook function when system running, such as idle task hook,
+            task context switch etc.
+
+    config OS_USING_IDLE_HOOK
+        bool "Enable idle task hook"
+        default y if OS_USING_HOOK
+
+        if OS_USING_IDLE_HOOK
+            config OS_IDLE_HOOK_LIST_SIZE
+                int "The max size of idle hook list"
+                default 4
+                range 1 16
+                help
+                    The system has a hook list. This is the hook list size.
+        endif
+
+    config OS_IDLE_TASK_STACK_SIZE
+        int "The stack size of idle task"
+        default 512
+
+    config OS_USING_TIMER_SOFT
+        bool "Enable software timer with a timer task"
+        default y
+        help
+            The timeout function context of soft-timer is under a high priority timer
+            task.
+
+        if OS_USING_TIMER_SOFT
+            config OS_TIMER_TASK_PRIO
+                int "The priority level value of timer task"
+                default 0
+
+            config OS_TIMER_TASK_STACK_SIZE
+                int "The stack size of timer task"
+                default 512
+        endif
+
+    config OS_USING_WORKQUEUE
+        bool "Enable workqueue"
+        depends on OS_USING_HEAP
+        default y
+            
+        if OS_USING_WORKQUEUE
+            config OS_USING_SYSTEM_WORKQUEUE
+                bool "Enable system workqueue"
+                default y
+                
+            if OS_USING_SYSTEM_WORKQUEUE
+                config OS_SYSTEM_WORKQUEUE_STACK_SIZE
+                    int "System workqueue task stack size"
+                    default 2048
+                    
+                config OS_SYSTEM_WORKQUEUE_PRIORITY
+                    int "System workqueue task priority level"
+                    default 3  if OS_TASK_PRIORITY_8
+                    default 8  if OS_TASK_PRIORITY_32
+                    default 20 if OS_TASK_PRIORITY_256
+            endif
+        endif
+        
+    if OS_USING_LIBC && OS_USING_VFS    
+        config OS_USING_MODULE
+            bool "Enable kernel module"
+            default n
+            help
+                Using kernel module and shared library.
+    endif
+    
+    menu "Task communication"
+        config OS_USING_SEMAPHORE
+            bool "Enable semaphore"
+            default y
+
+        config OS_USING_MUTEX
+            bool "Enable mutex"
+            default y
+
+        config OS_USING_EVENT
+            bool "Enable event flag"
+            default y
+
+        config OS_USING_MAILBOX
+            bool "Enable mailbox"
+            default y
+
+        config OS_USING_MESSAGEQUEUE
+            bool "Enable message queue"
+            default y
+
+        config OS_USING_COMPLETION
+            bool "Enable completion"
+            default y
+        
+        config OS_USING_DATAQUEUE
+            bool "Enable dataqueue"
+            depends on OS_USING_HEAP
+            default y
+        config OS_USING_WAITQUEUE
+            bool "Enable waitqueue"
+            default y
+    endmenu
+
+    menu "Memory management"
+        config OS_USING_MEM_POOL
+            bool "Using memory pool"
+            default y
+            help
+                Using static memory fixed partition
+
+        config OS_USING_MEM_HEAP
+            bool "Using memory heap object"
+            default n
+            help
+                Using memory heap object to manage dynamic memory heap.
+
+        choice
+            prompt "Dynamic memory management"
+            default OS_USING_MEM_SMALL
+
+            config OS_USING_NO_HEAP
+                bool "Disable heap"
+            config OS_USING_MEM_SMALL
+                bool "Small memory algorithm for small memory"
+            config OS_USING_MEM_SLAB
+                bool "SLAB algorithm for large memory"
+            if OS_USING_MEM_HEAP
+                config OS_USING_MEM_HEAP_AS_HEAP
+                    bool "Use all of memheap objects as heap"
+            endif
+        endchoice
+        config OS_USING_HEAP
+            bool
+            default n if OS_USING_NO_HEAP
+            default y if OS_USING_MEM_SMALL
+            default y if OS_USING_MEM_SLAB
+            default y if OS_USING_MEM_HEAP_AS_HEAP
+        
+        if OS_USING_MEM_SMALL || OS_USING_MEM_SLAB || OS_USING_MEM_HEAP_AS_HEAP
+            config OS_MEM_STATS
+                bool "Enable memory stats"
+                default y
+        endif
+        
+        if OS_USING_MEM_SMALL
+            config OS_USING_MEMTRACE
+                bool "Enable memory trace"
+                default n
+                help
+                    When enable OS_USING_MEMTRACE with shell, developer can call cmd:
+                    1. memtrace
+                       to dump memory block information.
+                    2. memcheck
+                       to check memory block to avoid memory overwritten.
+
+                    And developer also can call memcheck() in each of scheduling
+                    to check memory block to find which thread has wrongly modified
+                    memory.
+        endif
+    endmenu
+
+    menu "Kernel console"
+        config OS_USING_CONSOLE
+            bool "Using console for os_kprintf"
+            default y
+
+        if OS_USING_CONSOLE
+            config OS_CONSOLE_DEVICE_NAME
+                string "The device name for console"
+                default "uart1"
+        endif  
+    endmenu
+
+    menu "Enable assert"
+        config OS_USING_ASSERT
+            bool "Enable global assert"
+            default y
+    endmenu
+    
+    if OS_DEBUG
+        menu "Kernel debug"
+            config OS_USING_KERNEL_DEBUG
+                bool "Enable kernel debug"
+                default y
+            
+            if OS_USING_KERNEL_DEBUG
+                config OS_USING_CONTEXT_CHECK
+                bool "Enable check context"
+                default n       
+            endif
+
+            choice
+                prompt "The global log level of kernel"
+                default KLOG_GLOBAL_LEVEL_WARNING
+
+                config KLOG_GLOBAL_LEVEL_ERROR
+                    bool "Error"
+                config KLOG_GLOBAL_LEVEL_WARNING
+                    bool "Warning"
+                config KLOG_GLOBAL_LEVEL_INFO
+                    bool "Infomation"
+                config KLOG_GLOBAL_LEVEL_DEBUG
+                    bool "Debug"
+            endchoice
+            config KLOG_GLOBAL_LEVEL
+                int
+                default 0 if KLOG_GLOBAL_LEVEL_ERROR
+                default 1 if KLOG_GLOBAL_LEVEL_WARNING
+                default 2 if KLOG_GLOBAL_LEVEL_INFO
+                default 3 if KLOG_GLOBAL_LEVEL_DEBUG
+                
+            config KLOG_USING_COLOR
+                bool "Enable color log"
+                default y
+                help
+                    The log will has different color by level
+        endmenu
+    endif
+endmenu

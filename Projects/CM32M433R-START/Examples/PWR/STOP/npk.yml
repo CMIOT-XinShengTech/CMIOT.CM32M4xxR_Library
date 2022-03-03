@@ -1,0 +1,57 @@
+## Package Base Information
+name: app-START_STOP
+owner: XinShengTech
+version:
+description: STOP
+type: app
+keywords:
+  - PWR
+  - cm32m433rstart
+  
+license:
+homepage:
+
+## Package Dependency
+dependencies:
+  - name: bsp-cm32m4xxr_cm32m433rstart
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  app_commonflags:
+    value: -O2
+    type: text
+    description: Application Compile Flags
+
+## Set Configuration for other packages
+setconfig:
+
+
+## Source Code Management
+codemanage:
+  copyfiles:
+    - path: ["Application/Include", "Application/Source","gcc_cm32m4xxr_stop2.ld","readme.txt"]
+  incdirs:
+    - path: ["Application/Include"]
+  libdirs:
+  ldlibs:
+    - libs:
+
+## Build Configuration
+buildconfig:
+  - type: gcc
+    linkscript:
+      - script: "gcc_cm32m4xxr_stop2.ld"
+    common_flags: # flags need to be combined together across all packages
+      - flags: ${app_commonflags}
+    ldflags:
+    cflags:
+    asmflags:
+    cxxflags:
+    prebuild_steps: # could be override by app/bsp type
+      command:
+      description:
+    postbuild_steps: # could be override by app/bsp type
+      command:
+      description:

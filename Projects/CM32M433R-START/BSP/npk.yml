@@ -1,0 +1,66 @@
+## Package Base Information
+name: bsp-cm32m4xxr_cm32m433rstart
+owner: XinShengTech
+description: CM32M433R_START Board Support Package
+version: 1.1.0
+type: bsp
+keywords:
+  - cm32m433rstart
+  - cm32m4xxr
+  - risc-v
+  - xinsheng
+license: Apache-2.0
+homepage: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+
+packinfo:
+  vendor: XinShengTech
+  name: CM32M433R_START
+  doc:
+    website: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
+    sch: ../../../Docs/CM32M433R-START/cm32m433r-start.pdf
+    usermanual: ../../../Docs/CM32M433R-START/RISC-V生态开发板硬件手册V1.0.pdf
+    extra:
+      - uri: "../../../Docs/CM32M433R-START/CM32M4xxR开发板样例工程总体说明.pdf"
+        description: usermanual
+
+## Package Dependency
+dependencies:
+  - name: ssp-cm32m4xxr
+    version: 
+    owner: XinShengTech
+
+## Package Configurations
+configuration:
+  log_exclude:
+    default_value: 0
+    global: false
+    type: checkbox
+    description: exclude log.c
+
+## Source Code Management
+codemanage:
+  installdir: CM32M433R_START
+  copyfiles:
+    - path: ["Include/"]
+    - path: ["Source/key.c"]
+    - path: ["Source/led.c"]
+    - path: ["Source/log.c"]
+      condition: $( ${log_exclude} == 0 )
+  incdirs:
+    - path: ["Include/"]
+
+## Set Configuration for other packages
+setconfig:
+
+## Debug Configuration for this board
+debugconfig:
+  - type: openocd
+    description: Nuclei OpenOCD
+
+buildconfig:
+  - type: gcc
+    common_flags:
+      - flags:
+    common_defines:
+      - defines: DOWNLOAD_MODE=DOWNLOAD_MODE_$(upper(${download_mode}))
+      - defines: DOWNLOAD_MODE_STRING=\"$(upper(${download_mode}))\"
