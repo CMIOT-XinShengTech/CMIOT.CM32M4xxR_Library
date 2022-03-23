@@ -1,5 +1,5 @@
 # CMIOT.CM32M4xxR_Library
-芯昇科技MCU CM32M4xxR软件开发包，包括相关驱动代码、基于CM32M4xxR_LQFP128_STB开发板的样例代码，芯片及软硬件技术文档。
+芯昇科技MCU CM32M4xxR软件开发包，包括相关驱动代码、基于CM32M4xxR_LQFP128_STB开发板和CM32M433R开发板的样例代码，芯片及软硬件技术文档。
 # CM32M4xxR
 CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合信号MCU（支持FPU和DSP指令），主频高达144MHz，Flash最大512KB。
 # 目录结构说明
