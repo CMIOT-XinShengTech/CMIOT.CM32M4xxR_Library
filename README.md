@@ -171,29 +171,31 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 # 如何使用
 SDK采用Nuclei Studio NPK方式进行组织，请下载最新的Nuclei Studio版本[https://www.nucleisys.com/download.php] 配合使用。
 -   **导入SDK**：打开Nuclei Studio IDE，选择菜单栏 RV-Tools->Nuclei Package Management，打开包管理窗口，导入SDK压缩包“CMIOT.CM32M4xxR_Library.zip”，注意必须是zip压缩格式，然后等待导入完成。导入完成后，包管理窗口会显示sdk-cm32m4xxr的包信息，如下图：
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686153-877ab636-5701-455e-9509-9ed6a7c2af30.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159822951-4598242b-01bc-4601-aaf6-0e52772211cc.png"/> </div>
 
 -   **创建工程**：关闭包管理窗口，然后选择菜单栏File->New->New Nuclei RISC-V C/C++ Project，打开工程创建窗口。窗口左边列出了开发板的型号，用户可以根据自己的需求进行点击选择，右边是相关技术文档链接，包括芯片手册、软件说明、开发板使用指南、原理图等内容。然后点击next，继续进行工程创建。
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686258-dd5d0283-941f-435e-af18-1446b0c655aa.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823031-d39bdc1e-ccd6-46e3-b12a-530280076592.png"/> </div>
 
 　　自定义填写工程名称，由于开发板提供的样例工程比较多，可以选择过滤方式keywords，然后选择GPIO关键词进行筛选，之后可以在Project Example行选择GPIO相关工程。其他选项保持默认即可。点击Finish完成工程创建。
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686304-be363de1-d129-4682-993e-a8d4d2942cbd.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823090-cb62c9f2-445f-4c09-a394-4337645ef76c.png"/> </div>
 
 -   **编译调试**：选择菜单栏Project->Build All进行工程编译，编译完成后，显示如下：
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686494-1c54968a-ab49-427c-b0a9-d81d6bd42b45.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823119-830fa127-c4b3-4db2-a890-644948a73180.png"/> </div>
 
 　　菜单栏选择Run->Debug Configurations打开调试配置界面。样例工程中已经完成了调试配置，用户可以不用修改，仅需选择适合自己的调试配置进行使用。通过NPK方式导入的工程一共有三种调试配置，分别对应Jlink、蜂鸟和CM-Link调试支持。检查开发板供电和调试器连接，然后点击Debug Configurations，选择对应的调试配置，然后点击下面的Debug按钮，即可启动工程调试。
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686567-33c1c917-48db-4129-aaa8-59a8bb9e1ddd.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823138-323da3b9-3697-425a-919e-ed50559baa8d.png"/> </div>
 
 　　调试视图1号位置为调试控制栏；2号位置为Registers窗口，可以查看RSIC-V内核的寄存器数值；3号位置为Peripherals窗口，可以选择查看MCU各个片上外设的寄存器，勾选其中一个外设以后，就会在Memory窗口中显示该外设的寄存器内容。以上窗口可以通过菜单栏Windows->Show View中找到并打开。其他如变量查看、断点增删等内容不在此赘述。
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159686650-6d333a10-8fcf-4ebd-8712-da8abb99ee69.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823159-9dd081e3-b420-4323-b49b-d5899325668b.png"/> </div>
+
 　　点击调试控制栏里的运行按钮，然后启动程序运行，可以观察到开发板上三个LED进行闪烁。
   
   　每个样例工程的目录下都配套一个readme.txt文件，该文件介绍了样例工程的功能说明、使用方法、注意事项等内容，建议详细阅读。
 
 -   **下载**：Nuclei Studio IDE没有单独的下载按钮功能，在启动调试的过程中，IDE会根据链接文件的配置将程序下载到特定的位置，如将程序烧写到flash，请在编译配置选项界面选择gcc_cm32m4xxr_flashxip.ld文件，并修改DOWNLOAD_MODE的宏值为0。
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159690877-15d30fc5-c651-41c1-8f13-f6838f381f27.png"/> </div>
-<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159690891-d66f30fb-a100-4531-ab0c-b45741d70809.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823188-015b0895-14e4-4bcf-bf26-61dc2740c514.png"/> </div>
+<div align=center> <img src="https://user-images.githubusercontent.com/25890773/159823214-e189a507-06a9-4621-9283-1737bbc6dfb4.png"/> </div>
+
 
 # 芯昇科技有限公司
 芯昇科技有限公司注册成立于2020年12月29日，是中移物联网有限公司出资成立的子公司。按照中国移动通信集团“科改示范行动”整体改革布局，芯昇科技围绕物联网芯片国产化，以促进国家集成电路产业振兴为目标，以“创芯驱动万物互联，加速社会数智化转型”为使命，致力于成为“最具创新力的物联网芯片及应用领航者”。
