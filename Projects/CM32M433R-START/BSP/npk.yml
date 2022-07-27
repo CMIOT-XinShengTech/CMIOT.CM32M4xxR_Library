@@ -18,7 +18,7 @@ packinfo:
   doc:
     website: https://github.com/CMIOT-XinShengTech/CMIOT.CM32M4xxR_Library
     sch: ../../../Docs/CM32M433R-START/cm32m433r-start.pdf
-    usermanual: ../../../Docs/CM32M433R-START/RISC-V生态开发板硬件手册V1.0.pdf
+    usermanual: ../../../Docs/CM32M433R-START/CM32M433R-START生态开发板硬件手册V1.1.pdf
     extra:
       - uri: "../../../Docs/CM32M433R-START/CM32M4xxR开发板样例工程总体说明.pdf"
         description: usermanual

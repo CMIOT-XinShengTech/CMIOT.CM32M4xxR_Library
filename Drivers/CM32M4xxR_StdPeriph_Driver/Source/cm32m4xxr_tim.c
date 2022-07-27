@@ -890,7 +890,7 @@ void TIM_ICInit(TIM_Module* TIMx, TIM_ICInitType* TIM_ICInitStruct)
     assert_param(IsTimIcSelection(TIM_ICInitStruct->IcSelection));
     assert_param(IsTimIcPrescaler(TIM_ICInitStruct->IcPrescaler));
     assert_param(IsTimInCapFilter(TIM_ICInitStruct->IcFilter));
-    assert_param(IsTimIcPalaritySingleEdge(TIM_ICInitStruct->IcPolarity));
+    assert_param(IsTimIcPolarityAnyEdge(TIM_ICInitStruct->IcPolarity));
 
     if (TIM_ICInitStruct->Channel == TIM_CH_1)
     {
@@ -2923,7 +2923,10 @@ void TIM_SelectOutputTrig(TIM_Module* TIMx, uint16_t TIM_TRGOSource)
 /**
   * @brief  Selects the TIMx Ext Source.
   * @param 	TIMx where x can be 1, 2, 3, 4, 5, 6, 7, 8 to select the TIM peripheral.
-  * @param  Source: 0:selection external ETR(from IOM) signal.1:selection internal ETR(fromo TSC) signal.
+  * @param  ExtSigalSource
+  *   This parameter can be one of the following values:
+  *     @arg 0 selection external ETR(from IOM) signal
+  *     @arg 1 selection internal ETR(fromo TSC) signal
   * @retval None
   */
 void TIM_SelectExtSignalSource(TIM_Module* TIMx, uint16_t ExtSigalSource)

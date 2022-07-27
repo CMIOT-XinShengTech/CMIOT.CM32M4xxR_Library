@@ -50,7 +50,7 @@ extern "C" {
  * @{
  */
 
-/** @deftogroup TIM_Exported_Types TIM Exported Types
+/** @defgroup TIM_Exported_Types TIM Exported Types
  * @{
  */
 

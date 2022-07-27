@@ -183,7 +183,7 @@ void COMP_SetInpSel(COMP_PeriphType COMPx, COMP_CTRL_INPSEL_Type VpSel)
 /**
  * @brief Set non-reverse input source of the specified COMP.
  * @param COMPx where x can 1 to 7 to select the COMP to be configured.
- * @param VmSel non-reverse input source, see @COMP_CTRL_INMSEL_Type
+ * @param VmSel non-reverse input source, see @ref COMP_CTRL_INMSEL_Type
  */
 void COMP_SetInmSel(COMP_PeriphType COMPx, COMP_CTRL_INMSEL_Type VmSel)
 {

@@ -761,7 +761,7 @@ __STATIC_FORCEINLINE void __ECALL(void)
  */
 typedef enum WFI_SleepMode {
     WFI_SHALLOW_SLEEP = 0,      /*!< Shallow sleep mode, the core_clk will poweroff */
-    WFI_DEEP_SLEEP    = 1       /*!< Deep sleep mode, the core_clk and core_ano_clk will poweroff */
+    WFI_DEEP_SLEEP = 1          /*!< Deep sleep mode, the core_clk and core_ano_clk will poweroff */
 } WFI_SleepMode_Type;
 
 /**

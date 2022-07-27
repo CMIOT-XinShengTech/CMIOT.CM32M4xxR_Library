@@ -101,21 +101,21 @@ int main(void)
     /* Enable USARTz DMA Rx and TX request */
     USART_EnableDMA(USARTz, USART_DMAREQ_RX | USART_DMAREQ_TX, ENABLE);
 
-    /* Enable USARTy TX DMA1 Channel */
-    DMA_EnableChannel(USARTy_Tx_DMA_Channel, ENABLE);
+    /* Enable the USARTy and USARTz */
+	USART_Enable(USARTy, ENABLE);
+	USART_Enable(USARTz, ENABLE);
 
     /* Enable USARTy RX DMA1 Channel */
     DMA_EnableChannel(USARTy_Rx_DMA_Channel, ENABLE);
 
-    /* Enable USARTz TX DMA1 Channel */
-    DMA_EnableChannel(USARTz_Tx_DMA_Channel, ENABLE);
-
     /* Enable USARTz RX DMA1 Channel */
     DMA_EnableChannel(USARTz_Rx_DMA_Channel, ENABLE);
 
-    /* Enable the USARTy and USARTz */
-    USART_Enable(USARTy, ENABLE);
-    USART_Enable(USARTz, ENABLE);
+    /* Enable USARTy TX DMA1 Channel */
+	DMA_EnableChannel(USARTy_Tx_DMA_Channel, ENABLE);
+
+	/* Enable USARTz TX DMA1 Channel */
+	DMA_EnableChannel(USARTz_Tx_DMA_Channel, ENABLE);
 
     /* Wait until USARTy TX DMA1 Channel Transfer Complete */
     while (DMA_GetFlagStatus(USARTy_Tx_DMA_FLAG, USARTy_DMAx) == RESET)

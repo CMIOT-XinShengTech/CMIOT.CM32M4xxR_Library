@@ -43,13 +43,14 @@ extern "C" {
 
 
 
-#define    RTC_ALARM_TEST_TYPE_IRQ        0x01
-#define    RTC_ALARM_TEST_TYPE_OUTPUT     0x02
-#define    RTC_ALARM_TEST_TYPE            RTC_ALARM_TEST_TYPE_IRQ
+#define    RTC_ALARM_TEST_TYPE_IRQ        	0x01
+#define    RTC_ALARM_TEST_TYPE_OUTPUT     	0x02
+#define    RTC_ALARM_TEST_TYPE_IRQ_WAKEUP 	0x03
+#define    RTC_ALARM_TEST_TYPE            	RTC_ALARM_TEST_TYPE_IRQ
 
-#define    RTC_ALARM_OUT_TYPE_OPEN_DRAIN  0x01
-#define    RTC_ALARM_OUT_TYPE_PULL_PUSH   0x02
-#define    RTC_ALARM_OUT_TYPE             RTC_ALARM_OUT_TYPE_PULL_PUSH
+#define    RTC_ALARM_OUT_TYPE_OPEN_DRAIN  	0x01
+#define    RTC_ALARM_OUT_TYPE_PULL_PUSH   	0x02
+#define    RTC_ALARM_OUT_TYPE             	RTC_ALARM_OUT_TYPE_PULL_PUSH
 
 typedef enum {
     RTC_CLK_SRC_TYPE_HSE128=0x01,

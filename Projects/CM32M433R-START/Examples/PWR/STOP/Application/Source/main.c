@@ -159,15 +159,17 @@ int main(void)
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_PWR, ENABLE);
 
     /* Initialize LEDs on CM32M4xxR-EVAL board */
-    LedInit(LED_PORT, (LED1 | LED2 | LED3));
+    LedInit(LED1_PORT, LED1_PIN);
+    LedInit(LED2_PORT, LED2_PIN);
+    LedInit(LED3_PORT, LED3_PIN);
 
     /* Initialize Key button Interrupt to wakeUp stop */
     KeyInputExtiInit(KEY_INPUT_PORT, KEY_INPUT_PIN);
 
     /* Set the LED in different status */
-    LedOff(LED_PORT, LED1);
-    LedOff(LED_PORT, LED3);
-    LedOn(LED_PORT, LED2);
+    LedOff(LED1_PORT, LED1_PIN);
+    LedOff(LED3_PORT, LED3_PIN);
+    LedOn(LED2_PORT, LED2_PIN);
 
     /* Clear the EXIT Interrupt flag */
     EXTI_ClrITPendBit(EXTI_LINE0);
@@ -184,9 +186,9 @@ int main(void)
         delay(200);
 
         /* Set the LED */
-        LedBlink(LED_PORT, LED1);
-        LedOff(LED_PORT, LED2);
-        LedOff(LED_PORT, LED3);
+        LedBlink(LED1_PORT, LED1_PIN);
+        LedOff(LED2_PORT, LED2_PIN);
+        LedOff(LED3_PORT, LED3_PIN);
 
         _save_to_rram();
         /* Request to enter STOP mode with regulator in low power mode*/
@@ -199,8 +201,8 @@ int main(void)
            PLL as system clock source (HSE and PLL are disabled in STOP mode) */
         SYSCLKConfig_STOP(RCC_CFG_PLLMULFCT18);
 
-        LedInit(LED_PORT, LED3);
-        LedOn(LED_PORT, LED3);
+        LedInit(LED3_PORT, LED3_PIN);
+        LedOn(LED3_PORT, LED3_PIN);
     }
 }
 

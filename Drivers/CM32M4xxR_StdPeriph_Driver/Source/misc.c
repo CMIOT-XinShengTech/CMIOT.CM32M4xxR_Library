@@ -160,7 +160,7 @@ void sPMP_ClearRegion(uint8_t id)
 
 /**
  * @brief  Function of delay nus.
- * @param  nus:Delay number of us.
+ * @param  nus specifies Delay number of us.
  */
 void delay_us(uint32_t nus)
 {
@@ -177,7 +177,7 @@ void delay_us(uint32_t nus)
 
 /**
  * @brief  Function of delay nms.
- * @param  nms:Delay number of ms.
+ * @param  nms specifies Delay number of ms.
  */
 void delay_ms(uint32_t nms)
 {
@@ -194,9 +194,9 @@ void delay_ms(uint32_t nms)
 
 /**
  * @brief  when driver Interface parameter check failed, it will call assert_failed .
- * @param  expr: The expression of parameter check.
- *         file: source file name of the expression.
- *         line: source line number of the expression.
+ * @param  expr specifies The expression of parameter check.
+ * @param  file specifies source file name of the expression.
+ * @param  line specifies source line number of the expression.
  */
 __WEAK void assert_failed(const uint8_t* expr, const uint8_t* file, uint32_t line)
 {

@@ -23,8 +23,8 @@ packinfo:
     extra:
       - uri: "../Docs/Soc/CM32M4xxR系列芯片快速上手指南.pdf"
         description: UserManual
-      - uri: "../Docs/Soc/CM32M4xxR系列应用笔记.pdf"
-        description: ChipAppNote
+      - uri: "../Docs/Soc/CM32M4xxR系列勘误手册.pdf"
+        description: ChipErrata
       - uri: "../Docs/Soc/CM32M4xxR系列芯片驱动库总体说明.pdf"
         description: SoftwareNote
       - uri: "../Docs/Soc/CM32M4xxR系列芯片中断应用指南.pdf"

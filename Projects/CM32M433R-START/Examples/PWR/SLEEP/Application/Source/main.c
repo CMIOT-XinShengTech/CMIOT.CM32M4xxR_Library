@@ -67,10 +67,10 @@ int main(void)
     RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_PWR, ENABLE);
 
     /* Initialize LEDs on CM32M4xxR-EVAL board */
-    LedInit(LED_PORT, (LED2 | LED3));
+    LedInit(LED2_PORT, (LED2_PIN | LED3_PIN));
 
-    LedOff(LED_PORT, LED3);
-    LedOn(LED_PORT, LED2);
+    LedOff(LED3_PORT, LED3_PIN);
+    LedOn(LED2_PORT, LED2_PIN);
 
     /* Initialize Key button Interrupt to wake up the low power */
     KeyInputExtiInit(KEY_INPUT_PORT, KEY_INPUT_PIN);
@@ -85,11 +85,11 @@ int main(void)
     while (1)
     {
         /* Blink LED3 and turn off LED2 */
-    	LedBlink(LED_PORT, LED3);
+    	LedBlink(LED3_PORT, LED3_PIN);
 
         /* Insert a long delay */
         delay(600);
-        LedOff(LED_PORT, LED2);
+        LedOff(LED2_PORT, LED2_PIN);
 
         /* Request to enter SLEEP mode*/
         PWR_EnterSLEEPMode(PWR_STOPENTRY_WFI);

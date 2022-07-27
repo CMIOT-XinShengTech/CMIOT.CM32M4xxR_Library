@@ -185,7 +185,7 @@ __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2)
  * \return               Reversed value
  */
 #if defined(__DSP_PRESENT) && (__DSP_PRESENT == 1)
-#define __RBIT(value)           __RV_BITREV((value), 31)
+#define __RBIT(value)           __RV_BITREVI((value), 31)
 #else
 __STATIC_FORCEINLINE uint32_t __RBIT(uint32_t value)
 {

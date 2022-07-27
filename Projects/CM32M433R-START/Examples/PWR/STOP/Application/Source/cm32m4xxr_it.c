@@ -105,7 +105,7 @@ void EXTI0_IRQHandler(void)
         EXTI_ClrITPendBit(EXTI_LINE0);
 
         /* Blink LED2 */
-        //LedBlink(LED_PORT, LED2);
+        //LedBlink(LED2_PORT, LED2_PIN);
     }
 }
 

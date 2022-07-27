@@ -198,7 +198,8 @@ void RCC_Configuration(void)
     RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_GPIOG, ENABLE);
 
     /* Enable I2C4 and I2C2 clock */
-    RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_I2C2 | RCC_APB2_PERIPH_I2C4, ENABLE);
+    RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_I2C2, ENABLE);
+    RCC_EnableAPB2PeriphClk(RCC_APB2_PERIPH_I2C4, ENABLE);
 }
 
 /**
@@ -210,7 +211,7 @@ void GPIO_Configuration(void)
 
     /* Configure I2C4 pins: SCL and SDA */
     GPIO_InitStructure.Pin        = GPIO_PIN_9 | GPIO_PIN_10;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_OD;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 

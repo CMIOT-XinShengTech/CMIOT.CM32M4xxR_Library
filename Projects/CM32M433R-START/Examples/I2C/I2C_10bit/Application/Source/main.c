@@ -161,7 +161,7 @@ int i2c_master_init(void)
     i2c4_gpio.Pin               = GPIO_PIN_9;
     i2c4_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;
     i2c4_gpio.GPIO_Speed        = GPIO_Speed_2MHz;
-    GPIO_Init(GPIOB, &i2c4_gpio);
+    GPIO_Init(GPIOA, &i2c4_gpio);
 
     i2c4_gpio.Pin               = GPIO_PIN_10;
     i2c4_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;
@@ -198,7 +198,7 @@ int i2c_slave_init(void)
     i2c2_gpio.Pin               = GPIO_PIN_2;
     i2c2_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;
     i2c2_gpio.GPIO_Speed        = GPIO_Speed_2MHz;
-    GPIO_Init(GPIOB, &i2c2_gpio);
+    GPIO_Init(GPIOG, &i2c2_gpio);
 
     i2c2_gpio.Pin               = GPIO_PIN_3;
     i2c2_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;

@@ -75,8 +75,8 @@
     .weak  DMA1_Channel6_IRQHandler
     .weak  DMA1_Channel7_IRQHandler
     .weak  ADC1_2_IRQHandler
-    .weak  USB_HP_CAN1_TX_IRQHandler
-    .weak  USB_LP_CAN1_RX0_IRQHandler
+    .weak  CAN1_TX_IRQHandler
+    .weak  CAN1_RX0_IRQHandler
     .weak  CAN1_RX1_IRQHandler
     .weak  CAN1_SCE_IRQHandler
     .weak  EXTI9_5_IRQHandler
@@ -189,8 +189,8 @@ vector_base:
     DECLARE_INT_HANDLER		DMA1_Channel6_IRQHandler		/* 35: DMA1 Channel 6 global Interrupt */
     DECLARE_INT_HANDLER		DMA1_Channel7_IRQHandler		/* 36: DMA1 Channel 7 global Interrupt */
     DECLARE_INT_HANDLER		ADC1_2_IRQHandler				/* 37: ADC1 and ADC2 global Interrupt */
-    DECLARE_INT_HANDLER		USB_HP_CAN1_TX_IRQHandler		/* 38: USB Device High Priority or CAN1 TX Interrupts */
-    DECLARE_INT_HANDLER		USB_LP_CAN1_RX0_IRQHandler		/* 39: USB Device Low Priority or CAN1 RX0 Interrupts */
+    DECLARE_INT_HANDLER		CAN1_TX_IRQHandler				/* 38: CAN1 TX Interrupts */
+    DECLARE_INT_HANDLER		CAN1_RX0_IRQHandler				/* 39: CAN1 RX0 Interrupts */
     DECLARE_INT_HANDLER		CAN1_RX1_IRQHandler				/* 40: CAN1 RX1 Interrupt */
     DECLARE_INT_HANDLER		CAN1_SCE_IRQHandler				/* 41: CAN1 SCE Interrupt */
     DECLARE_INT_HANDLER		EXTI9_5_IRQHandler				/* 42: External Line[9:5] Interrupts */
@@ -250,7 +250,7 @@ vector_base:
     DECLARE_INT_HANDLER		DMA2_Channel8_IRQHandler		/* 96: DMA2 Channel 8 global Interrupt */
 	DECLARE_INT_HANDLER     default_intexc_handler			/* 97: Reserved */
 	DECLARE_INT_HANDLER		SAC_IRQHandler					/* 98: SAC global Interrupt */
-	DECLARE_INT_HANDLER     MMU_IRQHandler					/* 99: MMU global Interrupt */
+	DECLARE_INT_HANDLER     default_intexc_handler			/* 99: Reserved */
     DECLARE_INT_HANDLER		TSC_IRQHandler					/* 100: TSC global Interrupt */
 	DECLARE_INT_HANDLER		COMP_1_2_3_IRQHandler			/* 101: COMP1 & COMP2 & COMP3 global Interrupt */
     DECLARE_INT_HANDLER		COMP_4_5_6_IRQHandler			/* 102: COMP4 & COMP5 & COMP6 global Interrupt */

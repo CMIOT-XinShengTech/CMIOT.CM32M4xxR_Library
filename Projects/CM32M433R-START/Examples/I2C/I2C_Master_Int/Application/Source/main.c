@@ -154,17 +154,16 @@ int i2c_master_init(void)
 #endif
 #endif
 
-    /*PB6 -- SCL; PB7 -- SDA*/
     GPIO_InitStruct(&i2c_gpio);
     /* Configure IIC1 SCL pin */
-    i2c_gpio.Pin       = GPIO_PIN_6;
+    i2c_gpio.Pin       = I2Cx_SCL_PIN;
     i2c_gpio.GPIO_Mode = GPIO_Mode_AF_OD;
-    i2c_gpio.GPIO_Speed = GPIO_Speed_2MHz;
+    i2c_gpio.GPIO_Speed = GPIO_Speed_10MHz;
     GPIO_Init(GPIOx, &i2c_gpio);
     /* Configure IIC1 SDA pin */
-    i2c_gpio.Pin        = GPIO_PIN_7;
+    i2c_gpio.Pin        = I2Cx_SDA_PIN;
     i2c_gpio.GPIO_Mode  = GPIO_Mode_AF_OD;
-    i2c_gpio.GPIO_Speed = GPIO_Speed_2MHz;
+    i2c_gpio.GPIO_Speed = GPIO_Speed_10MHz;
     GPIO_Init(GPIOx, &i2c_gpio);
 
     I2C_DeInit(I2Cx);

@@ -409,7 +409,6 @@ extern "C" {
 
 
 /** @brief  Check if the HW detect mode is enable
- * @param  None
  * @retval Current state of HW detect mode
  */
 #define __TSC_GET_HW_MODE()                 (((TSC->CTRL) & TSC_FLAG_HW) == (TSC_FLAG_HW))
@@ -456,7 +455,7 @@ extern "C" {
 */
 
 /* Private macros ------------------------------------------------------------*/
-/** @addtogroup TSC Private Macros
+/** @defgroup TSC_Private_Macros TSC Private Macros
  * @{
  */
 #define IS_TSC_CLK_SOURCE(_CLK_)            (((_CLK_) == TSC_CLK_SRC_LSI) || ((_CLK_) == TSC_CLK_SRC_LSE))

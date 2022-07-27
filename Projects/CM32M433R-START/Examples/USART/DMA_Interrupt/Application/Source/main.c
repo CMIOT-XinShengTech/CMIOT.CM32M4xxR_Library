@@ -104,6 +104,10 @@ int main(void)
     USART_Init(USARTy, &USART_InitStructure);
     USART_Init(USARTz, &USART_InitStructure);
 
+    /* Enable the USARTy and USARTz */
+	USART_Enable(USARTy, ENABLE);
+	USART_Enable(USARTz, ENABLE);
+
     /* Enable USARTy DMA TX request */
     USART_EnableDMA(USARTy, USART_DMAREQ_TX, ENABLE);
 
@@ -113,18 +117,14 @@ int main(void)
     /* Enable the USARTz Receive Interrupt */
     USART_ConfigInt(USARTz, USART_INT_RXDNE, ENABLE);
 
+    /* Enable global interrupt */
+	__enable_irq();
+
     /* Enable USARTy TX DMA1 Channel */
     DMA_EnableChannel(USARTy_Tx_DMA_Channel, ENABLE);
 
     /* Enable USARTz TX DMA1 Channel */
     DMA_EnableChannel(USARTz_Tx_DMA_Channel, ENABLE);
-
-    /* Enable the USARTy and USARTz */
-    USART_Enable(USARTy, ENABLE);
-    USART_Enable(USARTz, ENABLE);
-
-    /* Enable global interrupt */
-    __enable_irq();
 
     /* Receive the TxBuffer2 */
     while (indexFlag < TxBufferSize2)

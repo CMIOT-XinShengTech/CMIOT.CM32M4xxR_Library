@@ -272,7 +272,7 @@ void GPIO_Configuration(void)
 
     /* Configure SPI_MASTER pins: SCK and MOSI */
     GPIO_InitStructure.Pin        = SPI_MASTER_PIN_SCK | SPI_MASTER_PIN_MOSI;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
     GPIO_Init(SPI_MASTER_GPIO, &GPIO_InitStructure);
 

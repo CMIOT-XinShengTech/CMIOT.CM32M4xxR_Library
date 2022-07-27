@@ -547,8 +547,11 @@ uint8_t CAN_TransmitMessage(CAN_Module* CANx, CanTxMessage* TxMessage)
 /**
  * @brief Checks the transmission of a message.
  * @param CANx where x can be 1 or 2 to to select the CAN peripheral.
- * @param Number of the mailbox that is used for transmission.
- *        CAN_TXMAILBOX_0 or CAN_TXMAILBOX_1 or CAN_TXMAILBOX_2.
+ * @param MailBox Number of the mailbox that is used for transmission.
+ *   This parameter can be one of the following values:
+ *     @arg CAN_TXMAILBOX_0
+ *     @arg CAN_TXMAILBOX_1
+ *     @arg CAN_TXMAILBOX_2
  * @return CAN_TxSTS_Ok if the CAN driver transmits the message, CAN_TxSTS_Failed
  *         in an other case.
  */
@@ -613,7 +616,7 @@ uint8_t CAN_TransmitSTS(CAN_Module* CANx, uint8_t MailBox)
 /**
  * @brief Cancels a transmit request.
  * @param CANx where x can be 1 or 2 to to select the CAN peripheral.
- * @param Number of the mailbox that wants to be cancel.
+ * @param Mailbox Number of the mailbox that wants to be cancel.
  *        CAN_TXMAILBOX_0 or CAN_TXMAILBOX_1 or CAN_TXMAILBOX_2.
  */
 void CAN_CancelTransmitMessage(CAN_Module* CANx, uint8_t Mailbox)

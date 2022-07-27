@@ -12,7 +12,7 @@
 3、使用说明
 	
 	系统配置；
-		1、时钟源：LSI
+		1、RTC时钟源：LSE
                 2、EXTI中断IO：PB8
 		3、串口配置：
 			- 串口为UART5（TX：PE8  RX：PE9）,可通过跳针连接U转串芯片后直接使用Micro USB与 MCU 进行串口通信

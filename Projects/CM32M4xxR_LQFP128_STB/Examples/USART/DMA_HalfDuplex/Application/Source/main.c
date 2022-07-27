@@ -67,8 +67,8 @@ uint8_t TxCounter1 = 0, RxCounter1 = 0;
 uint8_t TxCounter2 = 0, RxCounter2 = 0;
 volatile TestStatus TransferStatus1 = FAILED, TransferStatus2 = FAILED;
 
-__IO uint8_t USARTy_Tx_Done;
-__IO uint8_t USARTz_Rx_Done;
+__IO uint8_t USARTy_Tx_Done = 0;
+__IO uint8_t USARTz_Rx_Done = 0;
 
 void RCC_Configuration(void);
 void GPIO_Configuration(void);
@@ -113,27 +113,29 @@ int main(void)
     /* Enable USARTz DMA Rx and TX request */
     USART_EnableDMA(USARTz, USART_DMAREQ_RX | USART_DMAREQ_TX, ENABLE);
 
-    /* Enable USARTy TX DMA1 Channel */
-    DMA_EnableChannel(USARTy_Tx_DMA_Channel, ENABLE);
+    /* Enable USARTy Half Duplex Mode*/
+	USART_EnableHalfDuplex(USARTy, ENABLE);
+	/* Enable USARTz Half Duplex Mode*/
+	USART_EnableHalfDuplex(USARTz, ENABLE);
+
+    /* Enable the USARTy and USARTz */
+	USART_Enable(USARTy, ENABLE);
+	USART_Enable(USARTz, ENABLE);
+
     /* Enable USARTy RX DMA1 Channel */
     DMA_EnableChannel(USARTy_Rx_DMA_Channel, ENABLE);
 
-    /* Enable USARTz TX DMA1 Channel */
-    DMA_EnableChannel(USARTz_Tx_DMA_Channel, ENABLE);
     /* Enable USARTz RX DMA1 Channel */
     DMA_EnableChannel(USARTz_Rx_DMA_Channel, ENABLE);
 
-    /* Enable USARTy Half Duplex Mode*/
-    USART_EnableHalfDuplex(USARTy, ENABLE);
-    /* Enable USARTz Half Duplex Mode*/
-    USART_EnableHalfDuplex(USARTz, ENABLE);
+    /* Enable USARTy TX DMA1 Channel */
+	DMA_EnableChannel(USARTy_Tx_DMA_Channel, ENABLE);
+
+	/* Enable USARTz TX DMA1 Channel */
+	DMA_EnableChannel(USARTz_Tx_DMA_Channel, ENABLE);
 
     /* Enable global interrupt */
     __enable_irq();
-
-    /* Enable the USARTy and USARTz */
-    USART_Enable(USARTy, ENABLE);
-    USART_Enable(USARTz, ENABLE);
 	
     /* Wait until USARTy TX DMA Channel Transfer Complete */
     while(!USARTy_Tx_Done)

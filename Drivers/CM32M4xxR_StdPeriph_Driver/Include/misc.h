@@ -81,7 +81,13 @@ extern "C" {
 #define PMP_REGION_NUMBER5 ((uint8_t)0x05)
 #define PMP_REGION_NUMBER6 ((uint8_t)0x06)
 #define PMP_REGION_NUMBER7 ((uint8_t)0x07)
-
+/**
+  * @}
+  */
+  
+/** @defgroup RISCV_PMP_Region_Size RISC-V PMP Region Size
+  * @{
+  */
 #define PMP_REGION_SIZE_8B ((uint8_t)0x00)
 #define PMP_REGION_SIZE_16B ((uint8_t)0x01)
 #define PMP_REGION_SIZE_32B ((uint8_t)0x02)
@@ -151,7 +157,7 @@ extern "C" {
 /**
   * @}
   */
-/** @addtogroup MISC_Private_Macros
+/** @defgroup MISC_Private_Macros MISC Private Macros
  * @{
  */
 #define IS_PMP_REGION_ENABLE(STATE) (((STATE) == PMP_REGION_ENABLE) || \
@@ -226,7 +232,7 @@ typedef struct
                                                      This parameter can be a value of @ref RISCV_PMP_Region_Address_Matching     */
   uint32_t BaseAddress;     /*!< Specifies the base address of the region to protect.                           */
   uint8_t Size;             /*!< Specifies the size of the region to protect.
-                                                     This parameter can be a value of @ref                    */
+                                                     This parameter can be a value of @ref RISCV_PMP_Region_Size           */
   uint8_t AccessPermission; /*!< Specifies the region access permission type.
                                                      This parameter can be a value of @ref RISCV_PMP_Region_Access */
 
@@ -238,7 +244,7 @@ typedef struct
 /**
   * @}
   */
-/** @defgroup MISC_Exported_Functions EXTI Exported Functions
+/** @defgroup MISC_Exported_Functions MISC Exported Functions
  * @{
  */
 void PMP_ConfigRegion(PMP_Region_InitTypeDef *PMP_Init);
@@ -280,7 +286,12 @@ void PMP_ClearRegion(uint8_t id);
 #define SPMP_REGION_NUMBER5 ((uint8_t)0x05)
 #define SPMP_REGION_NUMBER6 ((uint8_t)0x06)
 #define SPMP_REGION_NUMBER7 ((uint8_t)0x07)
-
+/**
+  * @}
+  */
+/** @defgroup RISCV_sPMP_Region_Size RISC-V SPMP Region Size
+  * @{
+  */  
 #define SPMP_REGION_SIZE_8B ((uint8_t)0x00)
 #define SPMP_REGION_SIZE_16B ((uint8_t)0x01)
 #define SPMP_REGION_SIZE_32B ((uint8_t)0x02)
@@ -436,10 +447,10 @@ typedef struct
                                                      This parameter can be a value of @ref RISCV_sPMP_Region_Address_Matching     */
   uint32_t BaseAddress;     /*!< Specifies the base address of the region to protect.                           */
   uint8_t Size;             /*!< Specifies the size of the region to protect.
-                                                     This parameter can be a value of @ref                    */
+                                                     This parameter can be a value of @ref RISCV_sPMP_Region_Size                    */
   uint8_t AccessPermission; /*!< Specifies the region access permission type.
                                                      This parameter can be a value of @ref RISCV_sPMP_Region_Access */
-  uint8_t UserMode;  /*!< Specifies the region Indicates the sPMP entry is for user mode. .
+  uint8_t UserMode;  /*!< Specifies the region Indicates the sPMP entry is for user mode. 
                                                      This parameter can be a value of @ref RISCV_sPMP_Region_Usermode */
   uint8_t Lock; /*!< Specifies the region lock type.
                                                      This parameter can be a value of @ref RISCV_sPMP_Region_Lock */

@@ -148,10 +148,10 @@ int main(void)
 void ECLIC_Config(void)
 {
     /* Enable the CAN1 Interrupt */
-	ECLIC_SetLevelIRQ(USB_LP_CAN1_RX0_IRQn, 0);
-	ECLIC_SetPriorityIRQ(USB_LP_CAN1_RX0_IRQn, 0);
-	ECLIC_SetTrigIRQ(USB_LP_CAN1_RX0_IRQn, ECLIC_LEVEL_TRIGGER);
-	ECLIC_EnableIRQ(USB_LP_CAN1_RX0_IRQn);
+	ECLIC_SetLevelIRQ(CAN1_RX0_IRQn, 0);
+	ECLIC_SetPriorityIRQ(CAN1_RX0_IRQn, 0);
+	ECLIC_SetTrigIRQ(CAN1_RX0_IRQn, ECLIC_LEVEL_TRIGGER);
+	ECLIC_EnableIRQ(CAN1_RX0_IRQn);
 }
 
 /**

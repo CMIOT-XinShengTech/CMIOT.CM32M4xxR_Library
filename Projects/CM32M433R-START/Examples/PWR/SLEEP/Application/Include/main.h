@@ -43,13 +43,6 @@ extern "C" {
 
 #include "nuclei_sdk_soc.h"
 
-
-/* Led1-PB5, Led2-PB0, Led3-PB1 */
-#define LED_PORT		GPIOB
-#define LED1			GPIO_PIN_5
-#define LED2           	GPIO_PIN_0
-#define LED3           	GPIO_PIN_1
-
 #define KEY_INPUT_PORT 	GPIOA
 #define KEY_INPUT_PIN  	GPIO_PIN_0
 

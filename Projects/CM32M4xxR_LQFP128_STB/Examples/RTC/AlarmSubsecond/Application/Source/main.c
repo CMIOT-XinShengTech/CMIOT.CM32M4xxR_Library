@@ -39,7 +39,7 @@
 #include "log.h"
 #include "led.h"
 #include "User_RTC_Config.h"
-bool RTC_Time_Out_Flag=false;
+volatile bool RTC_Time_Out_Flag=false;
 /** @addtogroup CM32M4xxR_StdPeriph_Examples
  * @{
  */

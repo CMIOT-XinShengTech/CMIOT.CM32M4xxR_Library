@@ -56,7 +56,7 @@ int main(void) {
 	Key_Init();
 
 	/* Test if WKUP Key is pressed */
-	if (GPIO_ReadInputDataBit(GPIOA, GPIO_PIN_0) == Bit_RESET) {
+	if (GPIO_ReadInputDataBit(GPIOA, GPIO_PIN_0) != Bit_RESET) {
 		/* Initialise Flash */
 		FLASH_Init();
 		/* Execute the IAP driver in order to reprogram the Flash */

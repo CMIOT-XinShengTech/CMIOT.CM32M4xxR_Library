@@ -31,6 +31,7 @@
 extern "C" {
 #endif
 #include <stdint.h>
+#include "core_feature_eclic.h"
 
 extern uint32_t SystemCoreClock; /*!< System Clock Frequency (Core Clock)  */
 

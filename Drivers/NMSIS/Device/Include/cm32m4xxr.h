@@ -92,8 +92,8 @@ typedef enum IRQn {
     DMA1_Channel6_IRQn   = 35,			/*!< DMA1 Channel 6 global Interrupt                      */
     DMA1_Channel7_IRQn   = 36,			/*!< DMA1 Channel 7 global Interrupt                      */
     ADC1_2_IRQn          = 37,			/*!< ADC1 and ADC2 global Interrupt                       */
-    USB_HP_CAN1_TX_IRQn  = 38,			/*!< USB Device High Priority or CAN1 TX Interrupts       */
-    USB_LP_CAN1_RX0_IRQn = 39, 			/*!< USB Device Low Priority or CAN1 RX0 Interrupts       */
+    CAN1_TX_IRQn         = 38,			/*!< CAN1 TX Interrupts       */
+    CAN1_RX0_IRQn        = 39, 			/*!< CAN1 RX0 Interrupts       */
     CAN1_RX1_IRQn        = 40,			/*!< CAN1 RX1 Interrupt                                   */
     CAN1_SCE_IRQn        = 41,			/*!< CAN1 SCE Interrupt                                   */
     EXTI9_5_IRQn         = 42,			/*!< External Line[9:5] Interrupts                        */

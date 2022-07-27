@@ -88,7 +88,7 @@ void eclic_mtip_handler(void)
 /**
  * @brief  This function handles CAN1 RX0 Handler.
  */
-void USB_LP_CAN1_RX0_IRQHandler(void)
+void CAN1_RX0_IRQHandler(void)
 {
     CAN_ReceiveMessage(CAN1, CAN_FIFO0, &CAN1_RxMessage);
 }

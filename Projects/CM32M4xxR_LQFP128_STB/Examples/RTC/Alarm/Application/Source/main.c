@@ -47,6 +47,13 @@
 /** @addtogroup RTC_Calendar
  * @{
  */
+void delay(vu32 nCount)
+{
+    vu32 index = 0;
+    for (index = (34000 * nCount); index != 0; index--)
+    {
+    }
+}
 
 /**
  * @brief  Main function.
@@ -65,11 +72,18 @@ int main(void)
     LedOff(LED1_PORT,LED1_PIN);
     /* Initialize USART,TX: PC10 RX: PC11*/
     log_init();
+
+#if (RTC_ALARM_TEST_TYPE   ==  RTC_ALARM_TEST_TYPE_IRQ_WAKEUP)
+    log_info("Chip Reset ");
+    /* Enable PWR Clock */
+    RCC_EnableAPB1PeriphClk(RCC_APB1_PERIPH_PWR, ENABLE);
+#endif
+
     log_info("RTC Init");
     /* RTC date time alarm default value*/
     RTC_DateAndTimeDefaultVale();
     /* RTC clock source select 1:HSE/128 2:LSE 3:LSI*/
-    RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE_HSE128, true , true);//RTC_CLK_SRC_TYPE_LSE, true, true
+    RTC_CLKSourceConfig(RTC_CLK_SRC_TYPE_LSE, true , true);//RTC_CLK_SRC_TYPE_LSE, true, true
     RTC_PrescalerConfig();
     /* RTC date time and alarm regulate*/
     RTC_DateRegulate();
@@ -79,6 +93,13 @@ int main(void)
     /* Alarm out select option*/
 #if (RTC_ALARM_TEST_TYPE   ==  RTC_ALARM_TEST_TYPE_IRQ) // 1.Alarm interrupt test
     EXTI17_RTCAlarm_Configuration(ENABLE);
+
+#elif(RTC_ALARM_TEST_TYPE   ==  RTC_ALARM_TEST_TYPE_IRQ_WAKEUP) // 2.Alarm interrupt wakeup test
+	/* Insert a long delay */
+	delay(20);
+	/* Request to enter Standby mode*/
+	PWR_EnterStandbyState();
+
 #elif(RTC_ALARM_TEST_TYPE   ==  RTC_ALARM_TEST_TYPE_OUTPUT) // 2.Alarm out test
     /* Alarm output I/O config */
     #if (RTC_ALARM_OUT_TYPE_OPEN_DRAIN == RTC_ALARM_OUT_TYPE)

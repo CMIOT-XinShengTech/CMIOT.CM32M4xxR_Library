@@ -104,7 +104,7 @@ void USARTy_IRQHandler(void)
     if (USART_GetIntStatus(USARTy, USART_INT_RXDNE) != RESET)
     {
         /* Read one byte from the receive data register */
-        RxBuffer1[RxCounter1++] = (USART_ReceiveData(USARTy) & 0x7F);
+        RxBuffer1[RxCounter1++] = USART_ReceiveData(USARTy);
 
         if (RxCounter1 == NbrOfDataToRead1)
         {
@@ -134,7 +134,7 @@ void USARTz_IRQHandler(void)
     if (USART_GetIntStatus(USARTz, USART_INT_RXDNE) != RESET)
     {
         /* Read one byte from the receive data register */
-        RxBuffer2[RxCounter2++] = (USART_ReceiveData(USARTz) & 0x7F);
+        RxBuffer2[RxCounter2++] = USART_ReceiveData(USARTz);
 
         if (RxCounter2 == NbrOfDataToRead2)
         {

@@ -111,8 +111,8 @@ void RCC_Configuration(void)
 void GPIO_Configuration(void)
 {
     GPIO_InitType GPIO_InitStructure;
-    GPIO_ConfigPinRemap(GPIO_RMP_USART1,ENABLE);
-
+    //GPIO_ConfigPinRemap(GPIO_RMP_USART1,ENABLE);
+	GPIO_ConfigPinRemap(GPIO_RMP3_UART4, ENABLE);
     /* Configure USARTx Tx as alternate function push-pull */
     GPIO_InitStructure.Pin        = USARTx_TxPin;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
@@ -123,8 +123,6 @@ void GPIO_Configuration(void)
     GPIO_InitStructure.Pin       = USARTx_RxPin;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
     GPIO_Init(USARTx_GPIO, &GPIO_InitStructure);
-
-    GPIO_ConfigPinRemap(GPIO_RMP3_UART4, ENABLE);
 }
 
 /**

@@ -145,16 +145,15 @@ int i2c_slave_init(void)
 #endif
 #endif
 
-    /*PB8 -- SCL; PB9 -- SDA*/
     GPIO_InitStruct(&i2c_gpio);
-    i2c_gpio.Pin               = GPIO_PIN_6;
+    i2c_gpio.Pin               = I2Cx_SCL_PIN;
     i2c_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;
-    i2c_gpio.GPIO_Speed        = GPIO_Speed_2MHz;
+    i2c_gpio.GPIO_Speed        = GPIO_Speed_10MHz;
     GPIO_Init(GPIOx, &i2c_gpio);
 
-    i2c_gpio.Pin               = GPIO_PIN_7;
+    i2c_gpio.Pin               = I2Cx_SDA_PIN;
     i2c_gpio.GPIO_Mode         = GPIO_Mode_AF_OD;
-    i2c_gpio.GPIO_Speed        = GPIO_Speed_2MHz;
+    i2c_gpio.GPIO_Speed        = GPIO_Speed_10MHz;
     GPIO_Init(GPIOx, &i2c_gpio);
     
     I2C_DeInit(I2Cx);
@@ -202,6 +201,7 @@ int main(void)
     {
         log_info("%02x", data_buf[i]);
     }
+    log_info("\r\n");
     flag_slave_recv_finish = 0;
     
     I2CTimeout = I2CT_LONG_TIMEOUT * 1000;
@@ -284,7 +284,7 @@ void I2C4_EV_IRQHandler(void)
 }
 
 #ifdef I2C2_TEST
-void I2Cx_ER_IRQHandler(void)
+void I2C2_ER_IRQHandler(void)
 #endif
 #ifdef I2C4_TEST
 void I2C4_ER_IRQHandler(void)

@@ -111,7 +111,7 @@ int main(void)
         }
 
         /* Store the received byte in RxBuffer */
-        RxBuffer1[RxCounter++] = (USART_ReceiveData(USARTz) & 0x7F);
+        RxBuffer1[RxCounter++] = USART_ReceiveData(USARTz);
     }
 
     /* Check the received data with the send ones */
@@ -140,7 +140,7 @@ int main(void)
         }
 
         /* Store the received byte in RxBuffer */
-        RxBuffer2[RxCounter++] = (USART_ReceiveData(USARTy) & 0x7F);
+        RxBuffer2[RxCounter++] = USART_ReceiveData(USARTy);
     }
 
     /* Check the received data with the send ones */

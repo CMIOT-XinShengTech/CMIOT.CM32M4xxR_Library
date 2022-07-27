@@ -1361,7 +1361,7 @@ void ADC_InitEx(ADC_Module* ADCx, ADC_InitTypeEx* ADC_InitStructEx)
 /**
  * @brief Configure differential channels enable.
  * @param ADCx where x can be 1, 2 ,3 or 4 to select the ADC peripheral.
- * @param DifChs differential channels,see @ADC_dif_sel_ch_definition. eg: ADC_DIFSEL_CHS_3|ADC_DIFSEL_CHS_4
+ * @param DifChs differential channels,see @ref ADC_dif_sel_ch_definition. eg: ADC_DIFSEL_CHS_3|ADC_DIFSEL_CHS_4
  * @param Cmd enable differential channels
  */
 void ADC_SetDifChsEnable(ADC_Module* ADCx, uint32_t DifChs, FunctionalState Cmd)

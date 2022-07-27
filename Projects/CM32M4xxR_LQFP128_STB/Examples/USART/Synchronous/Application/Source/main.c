@@ -213,7 +213,7 @@ void GPIO_Configuration(void)
 
     /* Configure USARTy TX and USARTy CK pins as alternate function push-pull */
     GPIO_InitStructure.Pin        = USARTy_TxPin;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
     GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF_PP;
     GPIO_Init(USARTy_GPIO, &GPIO_InitStructure);
 
