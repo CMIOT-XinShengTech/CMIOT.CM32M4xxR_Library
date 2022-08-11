@@ -157,7 +157,7 @@ int main(void)
     {
     }
 
-    log_info("CAN2 transmit message to CAN2, Check CAN1 receive message PASSED\r\n");
+    log_info("CAN2 transmit message to CAN1, Check CAN1 receive message PASSED\r\n");
 
     while (1)
     {

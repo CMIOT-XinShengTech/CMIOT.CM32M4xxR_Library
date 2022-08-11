@@ -88,8 +88,11 @@ int main(void)
 void ChangeVmVp(void)
 {
 	delay_ms(5000);
-	GPIO_ResetBits(GPIOC, GPIO_PIN_15);
-    GPIO_SetBits(GPIOC, GPIO_PIN_14);
+	/*
+	 * the high 16 bits[16:31], set 1 to clear the port pin(0:15).
+	 * the low 16 bits[0:15],set 1 to set the port pin(0:15).
+	*/
+    GPIO_SetClearBits(GPIOC, (GPIO_PIN_15<<16)|GPIO_PIN_14);
 }
 
 /**
@@ -151,7 +154,7 @@ void GPIO_Configuration(void)
 	GPIO_InitStructure.Pin       = GPIO_PIN_11;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-	GPIO_ConfigPinRemap(GPIO_RMP3_COMP1,ENABLE);
+	GPIO_ConfigPinRemap(GPIO_RMP2_COMP1,ENABLE);//GPIO_RMP3_COMP1
 }
 
 

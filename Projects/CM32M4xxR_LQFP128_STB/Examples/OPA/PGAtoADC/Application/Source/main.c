@@ -86,7 +86,7 @@ void OPA_Configuration(void)
 {
     OPAMP_InitType OPAMP_Initial;
     OPAMP_StructInit(&OPAMP_Initial);
-    OPAMP_Initial.Mod            = OPAMP_CS_FOLLOW; // OPA_CS_FOLLOW;//OPA_CS_PGA_EN;
+    OPAMP_Initial.Mod            = OPAMP_CS_PGA_EN;//OPAMP_CS_FOLLOW; // OPA_CS_FOLLOW;//OPA_CS_PGA_EN;
     OPAMP_Initial.Gain           = OPAMP_CS_PGA_GAIN_2;
     OPAMP_Initial.HighVolRangeEn = ENABLE;
     OPAMP_Initial.TimeAutoMuxEn  = DISABLE;

@@ -28,8 +28,8 @@
                 - DMA发送接收模式均使能
     
         3、USART引脚连接如下：
-                - USART6_Tx.PC0    <------->   USART7_Rx.PG1
-				- USART7_Tx.PG0    <------->   USART6_Rx.PC1
+                - UART6_Tx.PC0    <------->   UART7_Rx.PG1
+				- UART7_Tx.PG0    <------->   UART6_Rx.PC1
 
         /* 描述Demo的测试步骤和现象 */
         1、编译后打开调试模式。

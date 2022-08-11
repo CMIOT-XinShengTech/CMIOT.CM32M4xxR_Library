@@ -46,7 +46,7 @@ ADC_InitType ADC_InitStructure;
 DMA_InitType DMA_InitStructure;
 __IO uint16_t ADC1ConvertedValue[50*1024] = {0,};
 __IO uint32_t gCnt = 0;
-extern int count;
+extern volatile int count;
 volatile int count_now = 0;
 void RCC_Configuration(void);
 void GPIO_Configuration(void);

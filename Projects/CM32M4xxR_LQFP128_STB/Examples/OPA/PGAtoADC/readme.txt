@@ -17,7 +17,6 @@
 
 		2、端口配置：
 					PA1选择为模拟功能OPA1 VP
-					PA5选择为模拟功能OPA1 VPS
 					PA6为OPA1的输出
 	    3、OPA：
 		            OPA1 PGA功能，倍数2倍

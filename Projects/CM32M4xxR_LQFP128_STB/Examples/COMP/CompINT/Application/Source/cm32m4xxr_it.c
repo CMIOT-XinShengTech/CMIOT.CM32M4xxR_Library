@@ -98,8 +98,11 @@ void COMP_1_2_3_IRQHandler(void)
 	{
 		printf("\r\n COMP1 IRQHandler in. \r\n");
 		COMP->INTSTS &= ~COMP_INTSTS_CMP1IS;
-		GPIO_ResetBits(GPIOC, GPIO_PIN_14);
-		GPIO_SetBits(GPIOC, GPIO_PIN_15);
+		/*
+		 * the high 16 bits[16:31], set 1 to clear the port pin(0:15).
+		 * the low 16 bits[0:15],set 1 to set the port pin(0:15).
+		*/
+	    GPIO_SetClearBits(GPIOC, (GPIO_PIN_14<<16)|GPIO_PIN_15);
 		while(COMP_GetOutStatus(COMP1)){;}
 	}
 	if(COMP_GetIntStsOneComp(COMP2))

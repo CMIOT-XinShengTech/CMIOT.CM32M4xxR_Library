@@ -98,7 +98,7 @@ void TIM3_IRQHandler(void)
         TIM_ClrIntPendingBit(TIM3, TIM_INT_CC1);
 
 		/* Get the Input Capture value */
-		Capture = TIM_GetCap2(TIM3);
+		Capture = TIM_GetCap1(TIM3);
 		LedBlink(LED1_PORT,LED1_PIN);
 
     }
