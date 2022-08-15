@@ -15,9 +15,9 @@ CM32M4xxR是芯昇科技首颗采用32位RISC-V内核（Nuclei N308）的混合�
 |-----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ├─ADC                                   |                                                                                                                                                                               |
 | │ ├─4ADCs_DMA                           | [4通道通过DMA、连续转换、软件触发示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/4ADCs_DMA)                                                                                 |
-| │ ├─ADC1_DMA                            | [1通道通过DMA、连续转换、扫描模式、软件触发示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC_SingleRead)                                                                  |
-| │ ├─ADC1_TEMP                           | [ADC1采样内部温度传感器的电压并算出温度值](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC1_DMA)                                                                              |
-| │ ├─ADC_SingleRead                      | [4通道通过软件触发转换示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC1_TEMP)                                                                                            |
+| │ ├─ADC1_DMA                            | [1通道通过DMA、连续转换、扫描模式、软件触发示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC1_DMA)                                                                        |
+| │ ├─ADC1_TEMP                           | [ADC1采样内部温度传感器的电压并算出温度值](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC1_TEMP)                                                                             |
+| │ ├─ADC_SingleRead                      | [4通道通过软件触发转换示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ADC_SingleRead)                                                                                       |
 | │ ├─AnalogWatchdog                      | [模拟看门狗功能示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/AnalogWatchdog)                                                                                              |
 | │ ├─ExtLinesTrigger                     | [ADC1通过DMA、扫描模式、外部触发示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/ExtLinesTrigger)                                                                            |
 | │ ├─RegSimul_DualMode                   | [ADC1、2同步规则通道模式、连续扫描模式、软件触发示例](Projects/CM32M4xxR_LQFP128_STB/Examples/ADC/RegSimul_DualMode)                                                          |
