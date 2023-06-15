@@ -674,10 +674,13 @@ void		RCC_ConfigSysclk (uint32_t RCC_SYSCLKSource);
 uint8_t		RCC_GetSysclkSrc (void);
 void		RCC_ConfigHclk (uint32_t RCC_SYSCLK);
 void		RCC_ConfigPclk1 (uint32_t RCC_HCLK);
+uint32_t    RCC_GetPclk1Psc(void);
 void		RCC_ConfigPclk2 (uint32_t RCC_HCLK);
+uint32_t    RCC_GetPclk2Psc(void);
 void		RCC_ConfigInt (uint8_t RccInt, FunctionalState Cmd);
 		
 void		RCC_ConfigTim18Clk (uint32_t RCC_TIM18CLKSource);
+uint32_t    RCC_GetTim18Clk(void);
 void		RCC_ConfigRngcClk (uint32_t RCC_RNGCCLKPrescaler);
 		
 void		RCC_ConfigAdc1mClk (uint32_t RCC_ADC1MCLKSource, uint32_t RCC_ADC1MPrescaler);

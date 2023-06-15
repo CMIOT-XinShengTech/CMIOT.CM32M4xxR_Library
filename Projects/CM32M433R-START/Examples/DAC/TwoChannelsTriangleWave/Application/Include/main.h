@@ -46,20 +46,6 @@ extern "C" {
 #include "cm32m4xxr_def.h"	/* Generic types definition */
 #include "cm32m4xxr_conf.h"	/* Peripheral module configuration  */
 
-/*Led1-PE6,Led2-PE7,Led3-PF6,Led4-PF7,Led5-PF8*/
-#define PORTE_GROUP GPIOE
-#define PORTF_GROUP GPIOF
-#define LED1_PORT   PORTE_GROUP
-#define LED2_PORT   PORTE_GROUP
-#define LED3_PORT   PORTF_GROUP
-#define LED4_PORT   PORTF_GROUP
-#define LED5_PORT   PORTF_GROUP
-#define LED1_PIN    GPIO_PIN_6
-#define LED2_PIN    GPIO_PIN_7
-#define LED3_PIN    GPIO_PIN_6
-#define LED4_PIN    GPIO_PIN_7
-#define LED5_PIN    GPIO_PIN_8
-
 #ifdef __cplusplus
 }
 #endif

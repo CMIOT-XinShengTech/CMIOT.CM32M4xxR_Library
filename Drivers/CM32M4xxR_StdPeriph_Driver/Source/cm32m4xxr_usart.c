@@ -128,11 +128,12 @@ void USART_DeInit(USART_Module* USARTx)
  */
 void USART_Init(USART_Module* USARTx, USART_InitType* USART_InitStruct)
 {
-    uint32_t tmpregister 		= 0x00;
-    uint32_t apbclock			= 0x00;
-    uint32_t integerdivider    	= 0x00;
-    uint32_t fractionaldivider	= 0x00;
-    uint32_t usartxbase        	= 0;
+    uint32_t tmpregister = 0x00, apbclock = 0x00;
+    uint32_t usartxbase        = 0;
+	uint32_t intdiv = 0;
+	uint32_t decdiv = 0;
+	uint32_t decdecdiv = 0;
+	uint32_t remainder;
     RCC_ClocksType RCC_ClocksStatus;
 
     /* Check the parameters */
@@ -205,23 +206,27 @@ void USART_Init(USART_Module* USARTx, USART_InitType* USART_InitStruct)
         apbclock = RCC_ClocksStatus.Pclk1Freq;
     }
 
-    /* Determine the integer part */
-    integerdivider = ((25 * apbclock) / (4 * (USART_InitStruct->BaudRate))); /* Multiply by 100 to take 2 decimal places */
-    tmpregister = (integerdivider / 100) << 4;
-
-    /* Determine the fractional part */
-    fractionaldivider = ((((integerdivider - (100 * (tmpregister >> 4))) * 16) + 50) / 100); /* Rounding decimals by adding 0.5 */
-
-    /*Determine whether the fractional part needs to carried*/
-    if((fractionaldivider >> 4) == 1){
-        tmpregister = ((integerdivider / 100) + 1) << 4;
-    }
-    
-    /* Implement the fractional part in the register */
-    tmpregister |= fractionaldivider & ((uint8_t)0x0F);
-
-    /* Write to USART PBC */
-    USARTx->BRCF = (uint16_t)tmpregister;
+	/* Get the Integer part of USARTDIV */
+	intdiv = apbclock / (16 * USART_InitStruct->BaudRate);
+	/* Get the remainder */
+	remainder = apbclock % (16 * USART_InitStruct->BaudRate);
+	/* Get the decimal part of USARTDIV */
+	decdiv = (16 * remainder) / (16 * USART_InitStruct->BaudRate);
+	/* Get the decimal of USARTDIV decimal part*/
+	decdecdiv = (16 * remainder) % (16 * USART_InitStruct->BaudRate);
+	/* Check rounding carry */
+	if((decdecdiv * 2) > USART_InitStruct->BaudRate)
+	{
+		decdiv += 1;
+		if(decdiv > 15)
+		{
+			decdiv = 0;
+			intdiv += 1;
+		}
+	}
+		
+	/* Write to USART PBC */
+	USARTx->BRCF = (intdiv << 4) | (decdiv);
 }
 
 /**

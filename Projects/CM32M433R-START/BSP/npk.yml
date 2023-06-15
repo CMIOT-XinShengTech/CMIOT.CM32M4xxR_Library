@@ -2,7 +2,7 @@
 name: bsp-cm32m4xxr_cm32m433rstart
 owner: XinShengTech
 description: CM32M433R_START Board Support Package
-version: 1.1.0
+version: 1.3.0
 type: bsp
 keywords:
   - cm32m433rstart
@@ -22,6 +22,14 @@ packinfo:
     extra:
       - uri: "../../../Docs/CM32M433R-START/CM32M4xxR开发板样例工程总体说明.pdf"
         description: usermanual
+      - uri: "../../../Docs/CM32M433R-START/CM32M433R_START_CAT1_01.pdf"
+        description: sch CAT1
+      - uri: "../../../Docs/CM32M433R-START/CM32M433R_START_EXT_02.pdf"
+        description: sch EXTEND
+      - uri: "../../../Docs/CM32M433R-START/CM32M433R_START_NB_01.pdf"
+        description: sch NB
+      - uri: "../../../Docs/CM32M433R-START/CM32M433R_START_WIFI_BLE_02.pdf"
+        description: sch WIFI_BLE
 
 ## Package Dependency
 dependencies:
@@ -42,8 +50,16 @@ codemanage:
   installdir: CM32M433R_START
   copyfiles:
     - path: ["Include/"]
+    - path: ["Source/aht20.c"]
+    - path: ["Source/gl5506.c"]
     - path: ["Source/key.c"]
+    - path: ["Source/lcd.c"]
     - path: ["Source/led.c"]
+    - path: ["Source/qmi8658.c"]
+    - path: ["Source/relay.c"]
+    - path: ["Source/sensor_iic_interface.c"]
+    - path: ["Source/tsckey.c"]
+    - path: ["Source/yaogan.c"]
     - path: ["Source/log.c"]
       condition: $( ${log_exclude} == 0 )
   incdirs:

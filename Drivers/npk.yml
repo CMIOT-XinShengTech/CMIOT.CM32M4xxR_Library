@@ -2,7 +2,7 @@
 name: ssp-cm32m4xxr
 owner: XinShengTech
 description: CM32M4xxR SoC Support Package
-version: 1.1.0
+version: 1.3.0
 type: ssp
 keywords:
   - cm32m4xxr
@@ -57,18 +57,30 @@ configuration:
         arch: rv32imacfp
         abi: ilp32f
         description: N308
-  newlibsel:
-    default_value: nano
+  stdclib:
+    default_value: newlib_nano
     type: choice
     global: true
-    description: Newlib Selection
+    description: Standard C Library
     choices:
-      - name: normal
-        description: Normal Newlib
-      - name: nano_with_printfloat
-        description: Newlib Nano with print float support
-      - name: nano
-        description: Newlib Nano
+      - name: newlib_full
+        description: newlib with full feature
+      - name: newlib_fast
+        description: newlib nano with printf/scanf float
+      - name: newlib_small
+        description: newlib nano with printf float
+      - name: newlib_nano
+        description: newlib nano without printf/scanf float
+      - name: libncrt_fast
+        description: nuclei c runtime library, optimized for speed
+      - name: libncrt_balanced
+        description: nuclei c runtime library, balanced, full feature
+      - name: libncrt_small
+        description: nuclei c runtime library, optimized for size, full feature
+      - name: libncrt_nano
+        description: nuclei c runtime library, optimized for size, no float support
+      - name: libncrt_pico
+        description: nuclei c runtime library, optimized for size, no long/long long support
   download_mode:
     default_value: flashxip
     type: choice
@@ -91,6 +103,7 @@ codemanage:
     - path: ["CM32M4xxR_StdPeriph_Driver"]
     - path: ["NMSIS/Core"]
     - path: ["NMSIS/DSP"]
+    - path: ["NMSIS/NN"]
     - path: ["NMSIS/Library"]
     - path: ["NMSIS/Device/Source/GCC/gcc_cm32m4xxr_flash.ld"]
     - path: ["NMSIS/Device/Source/GCC/gcc_cm32m4xxr_flashxip.ld"]
@@ -99,7 +112,53 @@ codemanage:
     - path: ["NMSIS/Device/Source/GCC/startup_cm32m4xxr.S"]
       condition: $( ${startup_special} == 0 )
     - path: ["NMSIS/Device/Include"]
-    - path: ["Env"]
+    - path: ["Env/Stubs/clock_getres.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/clock_gettime.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/clock_settime.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/close.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/execve.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/exit.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/fork.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/fstat.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/getpid.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/gettimeofday.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/isatty.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/kill.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/link.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/lseek.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/open.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/read.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/sbrk.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/stat.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/times.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/unlink.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/wait.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/write.c"]
+      condition: $( startswith(${stdclib}, "newlib") )
+    - path: ["Env/Stubs/stubs.c"]
+      condition: $( startswith(${stdclib}, "libncrt") )
+    - path: ["Env/cm32m4xxr.cfg"]
     - path: ["CM32M4xxR.svd"]
   incdirs:
     - path: ["CM32M4xxR_StdPeriph_Driver/Include"]
@@ -107,11 +166,14 @@ codemanage:
     - path: ["ENV/Stubs"]
     - path: ["NMSIS/Core/Include"]
     - path: ["NMSIS/Device/Include"]
+    - path: ["NMSIS/NN/Include"]
     - path: ["NMSIS/DSP/Include", "NMSIS/DSP/Include/dsp", "NMSIS/DSP/PrivateInclude"]
   libdirs:
+    - path: ["NMSIS/Library/NN/GCC"]
     - path: ["NMSIS/Library/DSP/GCC"]
     - path: ["CM32M4xxR_Algo_Library/Lib"]
   ldlibs:
+    - libs: ["nmsis_nn_rv32imafcp"]
     - libs: ["nmsis_dsp_rv32imafcp"]
     - libs: ["cm32m4xxr_aes_rv32imafc"]
     - libs: ["cm32m4xxr_des_rv32imafc"]
@@ -162,12 +224,21 @@ buildconfig:
       - flags: -g -fno-common -ffunction-sections -fdata-sections
       - flags: -march=${nuclei_core.arch} -mabi=${nuclei_core.abi} -mcmodel=medany
     ldflags:
-      - flags: -lstdc++ -nostartfiles --specs=nosys.specs
-      - flags: --specs=nano.specs
-        condition: $( ${newlibsel} != "normal" )
-      - flags: -u _printf_float
-        condition: $( ${newlibsel} == "nano_with_printfloat" )
+      - flags: -nostartfiles
+      - flags: -lstdc++
+        condition: $( startswith(${stdclib}, "newlib") )
+      - flags: --specs=nosys.specs
+        condition: $( ${stdclib} == "newlib_full" )
+      - flags: --specs=nano.specs --specs=nosys.specs -u _printf_float -u _scanf_float
+        condition: $( ${stdclib} == "newlib_fast" )
+      - flags: --specs=nano.specs --specs=nosys.specs -u _printf_float
+        condition: $( ${stdclib} == "newlib_small" )
+      - flags: --specs=nano.specs --specs=nosys.specs
+        condition: $( ${stdclib} == "newlib_nano" )
+      - flags: --specs=${stdclib}.specs
+        condition: $( startswith(${stdclib}, "libncrt") )
       - flags: -u _isatty -u _write -u _sbrk -u _read -u _close -u _fstat -u _lseek
+        condition: $( startswith(${stdclib}, "newlib") )
       - flags: -Xlinker --gc-sections
     cflags:
     asmflags:

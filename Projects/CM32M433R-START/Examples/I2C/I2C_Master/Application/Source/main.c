@@ -47,7 +47,7 @@
 
 #define TEST_BUFFER_SIZE  	(10)
 #define I2CT_FLAG_TIMEOUT 	((uint32_t) 0x1000)
-#define I2CT_LONG_TIMEOUT 	((uint32_t) (10 * I2C_FLAG_TIMOUT))
+#define I2CT_LONG_TIMEOUT 	((uint32_t) (10 * I2CT_FLAG_TIMEOUT))
 #define I2C_MASTER_ADDR   	(0x30)
 #define I2C_SLAVE_ADDR    	(0xA0)
 

@@ -390,6 +390,25 @@ void RCC_ConfigPclk1(uint32_t RCC_HCLK)
 }
 
 /**
+ * @brief  Get the Low Speed APB clock (PCLK1) prescaler value.
+ * @retval Prescaler value  one of the following values:
+ *     		RCC_HCLK_DIV1 APB1 clock = HCLK
+ *     		RCC_HCLK_DIV2 APB1 clock = HCLK/2
+ *     		RCC_HCLK_DIV4 APB1 clock = HCLK/4
+ *     		RCC_HCLK_DIV8 APB1 clock = HCLK/8
+ *    		RCC_HCLK_DIV16 APB1 clock = HCLK/16
+ */
+uint32_t RCC_GetPclk1Psc(void)
+{
+	uint32_t tmpregister = 0;
+
+	tmpregister = RCC->CFG;
+
+	/* return the APB1 prescaler value */
+	return (tmpregister & RCC_CFG_APB1PRES);
+}
+
+/**
  * @brief  Configures the High Speed APB clock (PCLK2).
  * @param RCC_HCLK defines the APB2 clock divider. This clock is derived from
  *   the AHB clock (HCLK).
@@ -417,6 +436,25 @@ void RCC_ConfigPclk2(uint32_t RCC_HCLK)
 	
     /* Store the new value */
     RCC->CFG = tmpregister;
+}
+
+/**
+ * @brief  Get the Low Speed APB clock (PCLK2) prescaler value.
+ * @retval Prescaler value  one of the following values:
+ *     		RCC_HCLK_DIV1 APB2 clock = HCLK
+ *     		RCC_HCLK_DIV2 APB2 clock = HCLK/2
+ *     		RCC_HCLK_DIV4 APB2 clock = HCLK/4
+ *     		RCC_HCLK_DIV8 APB2 clock = HCLK/8
+ *    		RCC_HCLK_DIV16 APB2 clock = HCLK/16
+ */
+uint32_t RCC_GetPclk2Psc(void)
+{
+	uint32_t tmpregister = 0;
+
+	tmpregister = RCC->CFG;
+
+	/* return the APB1 prescaler value */
+	return (tmpregister & RCC_CFG_APB2PRES);
 }
 
 /**
@@ -456,7 +494,7 @@ void RCC_ConfigInt(uint8_t RccInt, FunctionalState Cmd)
  * @param RCC_TIM18CLKSource specifies the TIM1/8 clock source.
  *   This parameter can be one of the following values:
  *     @arg RCC_TIM18CLK_SRC_TIM18CLK
- *     @arg RCC_TIM18CLKSource_AHBCLK
+ *     @arg RCC_TIM18CLK_SRC_SYSCLK
  */
 void RCC_ConfigTim18Clk(uint32_t RCC_TIM18CLKSource)
 {
@@ -475,6 +513,20 @@ void RCC_ConfigTim18Clk(uint32_t RCC_TIM18CLKSource)
 
     /* Store the new value */
     RCC->CFG2 = tmpregister;
+}
+
+/**
+ * @brief  Get the TIM1/8 clock Source (TIM1/8CLK).
+ * @retval TIM1/8 CLK Source (RCC_TIM18CLK_SRC_TIM18CLK or RCC_TIM18CLK_SRC_SYSCLK).
+ */
+uint32_t RCC_GetTim18Clk(void)
+{
+    uint32_t tmpregister = 0;
+
+    tmpregister = RCC->CFG2;
+
+    /* Return the TIM18CLK Source */
+    return (tmpregister & RCC_CFG2_TIMCLKSEL);
 }
 
 /**

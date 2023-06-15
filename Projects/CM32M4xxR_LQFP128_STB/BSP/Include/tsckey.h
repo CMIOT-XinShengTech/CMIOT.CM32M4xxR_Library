@@ -38,7 +38,7 @@
 #ifndef __TSCKEY_H__
 #define __TSCKEY_H__
 
-#include "main.h"
+#include "nuclei_sdk_soc.h"
 
 #define KEY_NUM     (2)
 #define TSC_CH_USED (TSC_CHNEN_CHN_SEL0|TSC_CHNEN_CHN_SEL1)

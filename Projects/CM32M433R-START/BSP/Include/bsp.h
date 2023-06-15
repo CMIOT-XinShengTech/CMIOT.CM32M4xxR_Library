@@ -39,5 +39,12 @@
 #include "log.h"
 #include "key.h"
 #include "led.h"
+#include "relay.h"
+#include "tsckey.h"
+#include "gl5506.h"
+
+#include "sensor_iic_interface.h"
+#include "qmi8658.h"
+#include "aht20.h"
 
 #endif /* __BSP_H__ */

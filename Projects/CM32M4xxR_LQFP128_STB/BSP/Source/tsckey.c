@@ -35,7 +35,7 @@
  *
  * @COPYRIGHT(c) 2020, China Mobile IOT. All rights reserved.
  */
-#include "nuclei_sdk_soc.h"
+
 #include "tsckey.h"
 #include "log.h"
 #include "string.h"

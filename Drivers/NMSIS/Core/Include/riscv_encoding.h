@@ -648,7 +648,7 @@
 
 
 #define CSR_SCOUNTEREN                                          0x106
-#define CSR_STVT                                                0x007
+#define CSR_STVT                                                0x107
 #define CSR_SNXTI                                               0x145
 #define CSR_SINSTATUS                                           0x146
 #define CSR_SSCRATCHCSW                                         0x148

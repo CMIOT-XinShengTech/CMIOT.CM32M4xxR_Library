@@ -111,7 +111,7 @@ void USARTz_Rx_DMA_IRQHandler(void)
         USARTz_Rx_Done = 1;
             
         DMA_ConfigInt(USARTz_Rx_DMA_Channel, DMA_INT_TXC, DISABLE);
-        DMA_ClrIntPendingBit(USARTz_Rx_DMA_INT, USARTy_DMAx);
+        DMA_ClrIntPendingBit(USARTz_Rx_DMA_INT, USARTz_DMAx);
     }     
 }
 

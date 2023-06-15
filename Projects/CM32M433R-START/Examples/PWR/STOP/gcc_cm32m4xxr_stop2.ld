@@ -119,6 +119,7 @@ ENTRY(_start)
 SECTIONS
 {
   __STACK_SIZE = DEFINED(__STACK_SIZE) ? __STACK_SIZE : 2K;
+  __HEAP_SIZE = DEFINED(__HEAP_SIZE) ? __HEAP_SIZE : 2K;
 
   .init           :
   {
@@ -277,13 +278,26 @@ SECTIONS
     PROVIDE( _rram_srodata_end = . );
   } >ram AT>ilm
 
+  .tdata           : ALIGN(8)
+  {
+    PROVIDE( __tls_base = . );
+    *(.tdata .tdata.* .gnu.linkonce.td.*)
+  } >ram AT>ilm
+
+  .tbss (NOLOAD)   : ALIGN(8)
+  {
+    *(.tbss .tbss.* .gnu.linkonce.tb.*)
+    *(.tcommon)
+    PROVIDE( __tls_end = . );
+  } >ram AT>ram
+
   . = ALIGN(4);
   PROVIDE( _edata = . );
   PROVIDE( edata = . );
 
   PROVIDE( _fbss = . );
   PROVIDE( __bss_start = . );
-  .bss            :
+  .bss            : ALIGN(8)
   {
     EXCLUDE_FILE(lib_a*.o *Stubs/*.o) *(.sbss*)
     /* Keep the value of data located between address
@@ -318,13 +332,30 @@ SECTIONS
   PROVIDE( _end = . );
   PROVIDE( end = . );
   
-  PROVIDE( _heap_start = ORIGIN(rram) );
-  PROVIDE( _heap_end = ORIGIN(rram) + __HEAP_SIZE );
+  /* Nuclei C Runtime Library requirements:
+   * 1. heap need to be align at 16 bytes
+   * 2. __heap_start and __heap_end symbol need to be defined
+   * 3. reserved at least __HEAP_SIZE space for heap
+   */
+  .heap (NOLOAD) :
+  {
+    . = ALIGN(16);
+    PROVIDE( __heap_start = . );
+    . += __HEAP_SIZE;
+    . = ALIGN(16);
+    PROVIDE( __heap_limit = . );
+  } >ram AT>ram
 
   /* Define stack and head location at retention ram */
   .stack ORIGIN(rram) + __HEAP_SIZE :
   {
-    . = __STACK_SIZE;
+    PROVIDE( _heap_end = . );
+    PROVIDE( __heap_end = . );
+    PROVIDE( __StackLimit = . );
+    PROVIDE( __StackBottom = . );
+    . += __STACK_SIZE;
+    . = ALIGN(16);
+    PROVIDE( __StackTop = . );
     PROVIDE( _sp = . );
   } >rram AT>rram
   

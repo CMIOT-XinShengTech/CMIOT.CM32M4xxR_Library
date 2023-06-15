@@ -258,6 +258,7 @@ ErrorStatus RTC_Init(RTC_InitType* RTC_InitStruct)
     if (RTC_EnterInitMode() == ERROR)
     {
         status = ERROR;
+        RTC_ExitInitMode();
     }
     else
     {
@@ -565,6 +566,7 @@ ErrorStatus RTC_ConfigTime(uint32_t RTC_Format, RTC_TimeType* RTC_TimeStruct)
     if (RTC_EnterInitMode() == ERROR)
     {
         status = ERROR;
+        RTC_ExitInitMode();
     }
     else
     {
@@ -729,6 +731,7 @@ ErrorStatus RTC_SetDate(uint32_t RTC_Format, RTC_DateType* RTC_DateStruct)
     if (RTC_EnterInitMode() == ERROR)
     {
         status = ERROR;
+        RTC_ExitInitMode();
     }
     else
     {

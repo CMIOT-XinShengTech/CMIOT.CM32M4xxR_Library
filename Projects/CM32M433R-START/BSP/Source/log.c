@@ -37,7 +37,6 @@
 
 #if LOG_ENABLE
 
-#include "nuclei_sdk_soc.h"
 
 /**
  * @brief  Initialize the uart to output log information.
@@ -88,9 +87,9 @@ int _put_char(int ch)
 int _get_char(void)
 {
 	/* Loop until the end of transmission */
-    while (USART_GetFlagStatus(UART5, USART_FLAG_RXDNE) == RESET);
+    while (USART_GetFlagStatus(LOG_USARTx, USART_FLAG_RXDNE) == RESET);
 
-    return USART_ReceiveData(UART5);
+    return USART_ReceiveData(LOG_USARTx);
 }
 
 #ifdef USE_FULL_ASSERT

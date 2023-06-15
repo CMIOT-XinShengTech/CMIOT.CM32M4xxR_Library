@@ -39,8 +39,8 @@ extern void os_hw_ticksetup(void);
 extern void *_stack_start;
 
 /** _heap_end symbol defined in linker script of Nuclei SDK */
-extern void *_heap_end;
-#define HEAP_BEGIN  &_heap_end
+extern void *__heap_limit;
+#define HEAP_BEGIN  &__heap_limit
 #define HEAP_END    &_stack_start
 
 void os_hw_board_init()

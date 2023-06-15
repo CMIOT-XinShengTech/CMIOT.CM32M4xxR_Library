@@ -596,6 +596,7 @@ void GPIO_CtrlEventOutput(FunctionalState Cmd)
 
 /**
  * @brief Changes the mapping of the specified pin.
+		  When use default RMP configuration such as RMP0, there is no need to call this function.
  * @param RmpPin selects the pin to remap.
  *   This parameter can be one of the following values:
  *     @arg GPIO_RMP_SPI1 SPI1 Alternate Function mapping

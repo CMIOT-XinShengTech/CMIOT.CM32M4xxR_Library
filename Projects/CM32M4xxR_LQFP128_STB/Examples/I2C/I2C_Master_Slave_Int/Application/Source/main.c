@@ -38,6 +38,7 @@
 
 #include "nuclei_sdk_soc.h"
 #include "bsp.h"
+#include "main.h"
 /** @addtogroup CM32M4xxR_StdPeriph_Examples
  * @{
  */

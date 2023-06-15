@@ -42,7 +42,7 @@
 extern "C" {
 #endif
 
-#include "cm32m4xxr.h"
+#include "nuclei_sdk_soc.h"
 
 typedef enum
 {

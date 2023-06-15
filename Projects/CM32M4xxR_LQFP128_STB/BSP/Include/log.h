@@ -41,7 +41,7 @@
 #if LOG_ENABLE
 
 #include <stdio.h>
-#include "main.h"
+#include "nuclei_sdk_soc.h"
 
 #ifdef LOG_UART_6
 #define LOG_USARTx			UART6
